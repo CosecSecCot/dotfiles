@@ -2,6 +2,10 @@
 
 CosecSecCot's developement environment, feel free to copy any stuff that you want!
 
+![Screenshot 1](./Screenshots/screenshot-20240402-181949Z-all.png)
+
+![Screenshot 1](./Screenshots/screenshot-20240402-181805Z-all.png)
+
 Main stuff that I use:
 
 ## Terminal Emulator
@@ -31,6 +35,7 @@ Major Modifications:
 
 `.tmux.conf` file consists:
 - Custom theme (that I tried to make)
+![Custom tmux statusbar](./Screenshots/screenshot-20240402-182338Z-selected.png)
 - Fix for color distortion issue
 
 ## Scripts
