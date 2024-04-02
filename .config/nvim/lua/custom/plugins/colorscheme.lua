@@ -223,7 +223,7 @@ return {
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "habamax.nvim",
+            colorscheme = "aurora",
         },
     },
 }
