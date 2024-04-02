@@ -209,6 +209,15 @@ return {
     },
     { "alessandroyorba/despacio" },
     { "ntk148v/habamax.nvim", dependencies = { "rktjmp/lush.nvim" } },
+    {
+        "crispybaccoon/aurora",
+        config = function()
+            require("aurora").setup {
+                transparent_background = true,
+                contrast_dark = "soft",
+            }
+        end,
+    },
 
     -- lazy = false,
     {
