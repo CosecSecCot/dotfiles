@@ -11,6 +11,7 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export TERM="tmux-256color"
+export PATH="$PATH:/opt/nvim/"
 
 # Scripts
 sessionizer() {
@@ -57,7 +58,7 @@ ZSH_THEME="robbyrussell" # set by `omz`
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
