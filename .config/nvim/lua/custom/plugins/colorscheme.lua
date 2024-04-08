@@ -218,12 +218,18 @@ return {
             }
         end,
     },
+    {
+        "CosecSecCot/midnight-desert.nvim",
+        dependencies = {
+            "rktjmp/lush.nvim",
+        },
+    },
 
     -- lazy = false,
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "aurora",
+            colorscheme = "midnight-desert",
         },
     },
 }
