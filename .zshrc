@@ -12,6 +12,8 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export TERM="tmux-256color"
 export PATH="$PATH:/opt/nvim/"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Scripts
 sessionizer() {
