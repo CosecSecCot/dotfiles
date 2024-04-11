@@ -296,7 +296,36 @@ require("lazy").setup({
             { "nvim-telescope/telescope-ui-select.nvim" },
 
             -- Useful for getting pretty icons, but requires a Nerd Font.
-            { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+            {
+                "nvim-tree/nvim-web-devicons",
+                enabled = vim.g.have_nerd_font,
+                config = function()
+                    require("nvim-web-devicons").setup {
+                        override_by_filename = {
+                            [".eslintrc.cjs"] = {
+                                icon = "󰱺",
+                                color = "#4b32c3",
+                                name = "Eslintrc",
+                            },
+                            [".prettierrc.json"] = {
+                                icon = "󰬗",
+                                color = "#4285f4",
+                                name = "Prettierrc",
+                            },
+                            ["vite.config.js"] = {
+                                icon = "󱐋",
+                                color = "#a074c4",
+                                name = "ViteConfig",
+                            },
+                            ["postcss.config.js"] = {
+                                icon = "󰯙",
+                                color = "#a80030",
+                                name = "PostcssConfig",
+                            },
+                        },
+                    }
+                end,
+            },
         },
         config = function()
             -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -598,6 +627,7 @@ require("lazy").setup({
                 eslint = {},
                 html = {},
                 cssls = {},
+                tailwindcss = {},
                 emmet_language_server = {},
                 bashls = {},
                 taplo = {},
