@@ -576,12 +576,12 @@ require("lazy").setup({
             })
 
             -- UI
-            require("lspconfig.ui.windows").default_options.border = "rounded"
+            require("lspconfig.ui.windows").default_options.border = "single"
 
             local float = {
                 focusable = true,
                 -- style = "minimal",
-                -- border = "single",
+                border = "single",
                 -- winblend = 20,
             }
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
@@ -816,7 +816,7 @@ require("lazy").setup({
             local cmp = require "cmp"
             local luasnip = require "luasnip"
             luasnip.config.setup {}
-            require("luasnip.loaders.from_lua").lazy_load { paths = "~/.config/nvim/snippets" } -- load snippets
+            require("luasnip.loaders.from_lua").lazy_load { paths = { "~/.config/nvim/snippets" } } -- load snippets
 
             cmp.setup {
                 snippet = {
@@ -827,7 +827,9 @@ require("lazy").setup({
                 completion = { completeopt = "menu,menuone,noinsert" },
                 window = {
                     -- diagnostic = cmp.config.window.bordered(),
-                    -- documentation = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered {
+                        border = "single",
+                    },
                     -- completion = cmp.config.window.bordered(),
                 },
 
@@ -1021,7 +1023,7 @@ require("lazy").setup({
     ui = {
         -- If you are using a Nerd Font: set icons to an empty table which will use the
         -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-        border = "rounded",
+        border = "single",
     },
 })
 

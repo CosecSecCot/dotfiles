@@ -30,7 +30,7 @@ sessionizer() {
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="af-magic"
 # ZSH_THEME="half-life"
-ZSH_THEME="amuse" # set by `omz`
+ZSH_THEME="afowler" # set by `omz`
 
 # Set list of themes to pick from when loading at racndom
 # Setting this variable when ZSH_THEME=random will cause zsh to load
