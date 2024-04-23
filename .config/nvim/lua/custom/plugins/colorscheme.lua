@@ -264,7 +264,7 @@ return {
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "cosec_twilight",
+            colorscheme = "cosec-twilight",
         },
     },
 }
