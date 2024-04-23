@@ -48,15 +48,15 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"
 -- Pumblend and WinBlend for translucent floats
-vim.opt.pumblend = 20
-vim.opt.winbl = 15
+vim.opt.pumblend = 10
+vim.opt.winbl = 10
 
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
@@ -894,15 +894,17 @@ require("lazy").setup({
                     fields = { "abbr", "kind", "menu" },
                     format = require("lspkind").cmp_format {
                         mode = "symbol_text",
-                        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                        -- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                         -- can also be a function to dynamically calculate max width such as
-                        -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+                        maxwidth = function()
+                            return math.floor(0.45 * vim.o.columns)
+                        end,
                         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-                        show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+                        show_labelDetails = false, -- show labelDetails in menu. Disabled by default
                         menu = {
                             nvim_lsp = "[LSP]",
-                            path = "[path]",
-                            luasnip = "[SNIPPET]",
+                            path = "[PATH]",
+                            luasnip = "[SNIP]",
                             buffer = "[buff]",
                         },
                     },
@@ -1016,9 +1018,9 @@ require("lazy").setup({
     --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
     --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
     { import = "custom.plugins" },
-    -- {
-    --     { dir = "~/Coding/Projects/midnight-desert", lazy = true },
-    -- },
+    {
+        { dir = "~/myfiles/cosec_twilight/", lazy = true },
+    },
 }, {
     ui = {
         -- If you are using a Nerd Font: set icons to an empty table which will use the
