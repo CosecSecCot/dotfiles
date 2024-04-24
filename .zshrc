@@ -12,8 +12,15 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export TERM="tmux-256color"
 export PATH="$PATH:/opt/nvim/"
+# Node
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# Go
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOPATH
+export PATH=$PATH:$GOROOT/bin
 
 # Scripts
 sessionizer() {

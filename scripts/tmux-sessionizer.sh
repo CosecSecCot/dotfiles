@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
+# if [[ $# -eq 1 ]]; then
+#     selected=$1
+
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    if [[ $1 == '.' ]]; then
+        selected=$(pwd)
+    elif [[ $1 == '..' ]]; then
+        selected=$(dirname $(pwd))
+    else
+        selected=$1
+    fi
 else
     selected=$(find ~ -maxdepth 3 -type d| fzf)
 fi
