@@ -30,60 +30,52 @@ local generator = function()
 
     local diagnostic_display = diagnostic.make_buffer()
 
-    local show_current_func = function(window, buffer)
-        if buffer.filetype == "lua" then
-            return ""
-        end
-
-        return lsp_statusline.current_function(window, buffer)
-    end
-
     local items = {
         { mode, required = true },
         { git_branch },
         { " " },
         { sections.split, required = true },
         { file_icon },
-        { sections.maximum_width(builtin.file_relative, 0.60), required = true },
+        { sections.maximum_width(builtin.tail_file, 0.60), required = true },
         { sections.collapse_builtin { { " " }, { builtin.modified_flag } } },
         { sections.split, required = true },
         { diagnostic_display },
-        { show_current_func },
-        { "[" },
+        { "  " },
         { builtin.line_with_width(3) },
-        { ":" },
+        { ": " },
         { builtin.column_with_width(2) },
-        { "]" },
+        { " " },
         { builtin.filetype },
+        { " " },
     }
 
     return items
 end
 
--- return {
--- "tjdevries/express_line.nvim",
+return {
+    "tjdevries/express_line.nvim",
 
--- config = function()
---     local el = require "el"
+    config = function()
+        local el = require "el"
 
--- Disappearing statusline for commands
---
--- vim.opt.cmdheight = 0
--- vim.api.nvim_create_autocmd("ModeChanged", {
---     group = vim.api.nvim_create_augroup("StatusDisappear", { clear = true }),
---     callback = function()
---         if vim.v.event.new_mode == "c" then
---             vim.opt.laststatus = 0
---         elseif vim.v.event.old_mode == "c" then
---             vim.opt.laststatus = 3
---         end
+        -- Disappearing statusline for commands
+        --
+        -- vim.opt.cmdheight = 0
+        -- vim.api.nvim_create_autocmd("ModeChanged", {
+        --     group = vim.api.nvim_create_augroup("StatusDisappear", { clear = true }),
+        --     callback = function()
+        --         if vim.v.event.new_mode == "c" then
+        --             vim.opt.laststatus = 0
+        --         elseif vim.v.event.old_mode == "c" then
+        --             vim.opt.laststatus = 3
+        --         end
 
---         vim.cmd [[silent! redraw]]
---     end,
--- })
+        --         vim.cmd [[silent! redraw]]
+        --     end,
+        -- })
 
--- el.setup { generator = generator }
--- end,
--- }
+        el.setup { generator = generator }
+    end,
+}
 
-return {}
+-- return {}
