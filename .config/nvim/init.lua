@@ -308,7 +308,7 @@ require("lazy").setup({
                                 name = "Eslintrc",
                             },
                             [".prettierrc.json"] = {
-                                icon = "󰬗",
+                                icon = "",
                                 color = "#4285f4",
                                 name = "Prettierrc",
                             },
@@ -338,6 +338,51 @@ require("lazy").setup({
                                 icon = "󰟓",
                                 color = "#01add7",
                                 name = "Go",
+                            },
+                            ["factor"] = {
+                                icon = "󰬍",
+                                color = "#e37933",
+                                name = "Factor",
+                            },
+                            ["mli"] = {
+                                icon = "",
+                                color = "#e44d26",
+                                name = "Mli",
+                            },
+                            ["lpi"] = {
+                                icon = "󰏩",
+                                color = "#519aba",
+                                name = "Lpi",
+                            },
+                            ["lpr"] = {
+                                icon = "󰏩",
+                                color = "#6975c4",
+                                name = "Lpr",
+                            },
+                            ["pas"] = {
+                                icon = "󰏩",
+                                color = "#a074c4",
+                                name = "Pas",
+                            },
+                            ["lps"] = {
+                                icon = "󰏩",
+                                color = "#e44d26",
+                                name = "Lps",
+                            },
+                            ["purs"] = {
+                                icon = "",
+                                color = "#a074c4",
+                                name = "Purs",
+                            },
+                            ["re"] = {
+                                icon = "",
+                                color = "#cc3e44",
+                                name = "Re",
+                            },
+                            ["rei"] = {
+                                icon = "",
+                                color = "#e37933",
+                                name = "Rei",
                             },
                         },
                     }

@@ -9,11 +9,29 @@ return {
         local nvimtree = require "nvim-tree"
         -- local nonicons_extention = require "nvim-nonicons.extentions.nvim-tree"
         nvimtree.setup {
-            -- renderer = {
-            --     icons = {
-            --         -- glyphs = nonicons_extention.glyphs,
-            --     },
-            -- },
+            renderer = {
+                icons = {
+                    --         -- glyphs = nonicons_extention.glyphs,
+                    -- indent_markers = {
+                    --     inline_arrows = false,
+                    -- },
+                    symlink_arrow = " 󰁜 ",
+                    show = {
+                        diagnostics = false,
+                    },
+                    glyphs = {
+                        git = {
+                            unstaged = "M",
+                            staged = "S",
+                            unmerged = "",
+                            renamed = "R",
+                            untracked = "U",
+                            deleted = "",
+                            ignored = "◌",
+                        },
+                    },
+                },
+            },
             disable_netrw = true,
             hijack_netrw = true,
             actions = {
