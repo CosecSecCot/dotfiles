@@ -893,9 +893,11 @@ require("lazy").setup({
                 completion = { completeopt = "menu,menuone,noinsert" },
                 window = {
                     -- diagnostic = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered {
-                        border = "single",
+                    documentation = {
+                        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None",
+                        -- border = "single",
                     },
+
                     -- completion = cmp.config.window.bordered(),
                 },
 
@@ -1060,6 +1062,12 @@ require("lazy").setup({
             --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
             --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
             --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+        end,
+    },
+    {
+        "/nvim-treesitter/playground",
+        config = function()
+            vim.keymap.set("n", "<leader>io", "<cmd>TSHighlightCapturesUnderCursor<CR>")
         end,
     },
 

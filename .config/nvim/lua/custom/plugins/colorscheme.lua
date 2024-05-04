@@ -259,6 +259,9 @@ return {
     {
         "amadeus/vim-convert-color-to",
     },
+    {
+        "tjdevries/colorbuddy.nvim",
+    },
 
     -- lazy = false,
     {
