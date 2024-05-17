@@ -85,7 +85,7 @@ vim.opt.listchars = {
     -- tab = "· ",
     trail = "·",
     nbsp = "␣",
-    -- eol = '↲',
+    eol = "↲",
 }
 
 -- Preview substitutions live, as you type!
@@ -691,6 +691,7 @@ require("lazy").setup({
                 cssls = {},
                 tailwindcss = {},
                 emmet_language_server = {},
+                -- htmx_lsp = {},
                 bashls = {},
                 taplo = {},
 
