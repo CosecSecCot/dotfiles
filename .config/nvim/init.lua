@@ -48,8 +48,8 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"
 -- Pumblend and WinBlend for translucent floats
-vim.opt.pumblend = 10
-vim.opt.winbl = 10
+vim.opt.pumblend = 5
+vim.opt.winbl = 0
 
 vim.opt.wrap = false
 
@@ -305,12 +305,17 @@ require("lazy").setup({
                             [".eslintrc.cjs"] = {
                                 icon = "󰱺",
                                 color = "#4b32c3",
-                                name = "Eslintrc",
+                                name = "EslintrcCJS",
+                            },
+                            [".eslintrc.json"] = {
+                                icon = "󰱺",
+                                color = "#4b32c3",
+                                name = "EslintrcJSON",
                             },
                             [".prettierrc.json"] = {
                                 icon = "",
                                 color = "#4285f4",
-                                name = "Prettierrc",
+                                name = "PrettierrcJSON",
                             },
                             ["vite.config.js"] = {
                                 icon = "󱐋",
@@ -321,6 +326,16 @@ require("lazy").setup({
                                 icon = "󰯙",
                                 color = "#a80030",
                                 name = "PostcssConfig",
+                            },
+                            ["postcss.config.mjs"] = {
+                                icon = "󰯙",
+                                color = "#a80030",
+                                name = "PostcssConfigMJS",
+                            },
+                            ["next.config.mjs"] = {
+                                icon = "󰰓",
+                                color = "white",
+                                name = "NextConfigMJS",
                             },
                             ["go.mod"] = {
                                 icon = "󰏗󰟓",
@@ -638,19 +653,22 @@ require("lazy").setup({
             })
 
             -- UI
-            require("lspconfig.ui.windows").default_options.border = "single"
+            -- require("lspconfig.ui.windows").default_options.border = "single"
 
             local float = {
                 focusable = true,
                 -- style = "minimal",
-                border = "single",
+                -- border = "single",
                 -- winblend = 20,
             }
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
             vim.lsp.handlers["textDocument/signatureHelp"] =
                 vim.lsp.with(vim.lsp.handlers.signature_help, float)
             vim.diagnostic.config {
-                float = float,
+                float = {
+                    focusable = true,
+                    border = "single",
+                },
             }
 
             -- LSP servers and clients are able to communicate to each other what features they support.
@@ -690,7 +708,21 @@ require("lazy").setup({
                 html = {},
                 cssls = {},
                 tailwindcss = {},
-                emmet_language_server = {},
+                prismals = {},
+                emmet_language_server = {
+                    filetypes = {
+                        "css",
+                        "eruby",
+                        "html",
+                        "javascript",
+                        "javascriptreact",
+                        "less",
+                        "sass",
+                        "scss",
+                        "pug",
+                        "typescriptreact",
+                    },
+                },
                 -- htmx_lsp = {},
                 bashls = {},
                 taplo = {},
@@ -719,7 +751,7 @@ require("lazy").setup({
             --  You can press `g?` for help in this menu.
             require("mason").setup {
                 ui = {
-                    border = "single",
+                    -- border = "single",
                 },
             }
 
@@ -849,6 +881,13 @@ require("lazy").setup({
             -- Snippet Engine & its associated nvim-cmp source
             {
                 "L3MON4D3/LuaSnip",
+                -- "mlaursen/vim-react-snippets",
+                "avneesh0612/react-nextjs-snippets",
+                -- "xabikos/vscode-react",
+                -- {
+                --     "dsznajder/vscode-es7-javascript-react-snippets",
+                --     build = "yarn install --frozen-lockfile && yarn compile",
+                -- },
                 build = (function()
                     -- Build Step is needed for regex support in snippets.
                     -- This step is not supported in many windows environments.
@@ -884,6 +923,8 @@ require("lazy").setup({
             local luasnip = require "luasnip"
             luasnip.config.setup {}
             require("luasnip.loaders.from_lua").lazy_load { paths = { "~/.config/nvim/snippets" } } -- load snippets
+            require("luasnip.loaders.from_vscode").lazy_load()
+            -- require("vim-react-snippets").lazy_load()
 
             cmp.setup {
                 snippet = {
@@ -1089,6 +1130,14 @@ require("lazy").setup({
     {
         "rktjmp/shipwright.nvim",
     },
+    {
+        "edluffy/hologram.nvim",
+        config = function()
+            require("hologram").setup {
+                auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
+            }
+        end,
+    },
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
     --    This is the easiest way to modularize your config.
@@ -1096,14 +1145,14 @@ require("lazy").setup({
     --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
     --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
     { import = "custom.plugins" },
-    -- {
-    --     { dir = "~/myfiles/cosec-twilight/", lazy = true },
-    -- },
+    {
+        { dir = "~/myfiles/cosec-twilight/", lazy = true },
+    },
 }, {
     ui = {
         -- If you are using a Nerd Font: set icons to an empty table which will use the
         -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-        border = "single",
+        -- border = "single",
     },
 })
 

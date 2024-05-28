@@ -27,7 +27,7 @@ return {
     },
     { "nyoom-engineering/oxocarbon.nvim" },
     { "nyoom-engineering/oxocarbon.nvim" },
-    { "https://github.com/rafi/awesome-vim-colorschemes" },
+    { "rafi/awesome-vim-colorschemes" },
     { "fcpg/vim-fahrenheit" },
     { "Lokaltog/vim-distinguished" },
     { "savq/melange-nvim" },
@@ -136,7 +136,13 @@ return {
         end,
     },
     { "chiendo97/intellij.vim" },
-    { "sainnhe/gruvbox-material" },
+    {
+        "sainnhe/gruvbox-material",
+        config = function()
+            vim.g.gruvbox_material_enable_italic = 1
+            -- vim.g.gruvbox_material_background = "hard"
+        end,
+    },
     --  'tinted-theming/base16-vim'
     { "metalelf0/base16-black-metal-scheme" },
     { "rockerBOO/boo-colorscheme-nvim" },
@@ -261,6 +267,9 @@ return {
     },
     {
         "tjdevries/colorbuddy.nvim",
+    },
+    {
+        "ntk148v/komau.vim",
     },
 
     -- lazy = false,
