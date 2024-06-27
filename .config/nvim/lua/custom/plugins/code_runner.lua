@@ -22,6 +22,7 @@ return {
                 },
                 cpp = {
                     'cd "$dir" &&',
+                    -- 'g++ -std=c++20 -O2 -Wall "$fileName" -include stdc++.h -o a.out &&',
                     'g++ -std=c++20 -O2 -Wall "$fileName" -o a.out &&',
                     '"$dir/a.out"',
                 },

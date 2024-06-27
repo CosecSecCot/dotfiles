@@ -52,30 +52,28 @@ local generator = function()
     return items
 end
 
--- return {
--- "tjdevries/express_line.nvim",
+return {
+    "tjdevries/express_line.nvim",
 
--- config = function()
---     local el = require "el"
+    config = function()
+        local el = require "el"
 
--- Disappearing statusline for commands
---
--- vim.opt.cmdheight = 0
--- vim.api.nvim_create_autocmd("ModeChanged", {
---     group = vim.api.nvim_create_augroup("StatusDisappear", { clear = true }),
---     callback = function()
---         if vim.v.event.new_mode == "c" then
---             vim.opt.laststatus = 0
---         elseif vim.v.event.old_mode == "c" then
---             vim.opt.laststatus = 3
---         end
+        -- Disappearing statusline for commands
+        --
+        -- vim.opt.cmdheight = 0
+        -- vim.api.nvim_create_autocmd("ModeChanged", {
+        --     group = vim.api.nvim_create_augroup("StatusDisappear", { clear = true }),
+        --     callback = function()
+        --         if vim.v.event.new_mode == "c" then
+        --             vim.opt.laststatus = 0
+        --         elseif vim.v.event.old_mode == "c" then
+        --             vim.opt.laststatus = 3
+        --         end
+        --
+        --         vim.cmd [[silent! redraw]]
+        --     end,
+        -- })
 
---         vim.cmd [[silent! redraw]]
---     end,
--- })
-
---     el.setup { generator = generator }
--- end,
--- }
-
-return {}
+        el.setup { generator = generator }
+    end,
+}

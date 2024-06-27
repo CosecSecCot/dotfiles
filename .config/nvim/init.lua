@@ -7,6 +7,44 @@ vim.g.maplocalleader = " "
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
+if vim.g.neovide then
+    -- vim.o.guifont = "JetbrainsMono Nerd Font:h26"
+    vim.o.guifont = "Menlo:h24"
+
+    vim.g.neovide_scroll_animation_length = 0.1
+    -- vim.g.neovide_cursor_animation_length = 0.006
+    vim.g.neovide_cursor_animation_length = 0
+
+    vim.g.neovide_transparency = 0.95
+    vim.g.transparency = 0.95
+
+    vim.g.neovide_floating_blur_amount_x = 5.0
+    vim.g.neovide_floating_blur_amount_y = 5.0
+
+    vim.g.neovide_floating_shadow = true
+    vim.g.neovide_floating_z_height = 10
+    vim.g.neovide_light_angle_degrees = 45
+    vim.g.neovide_light_radius = 10
+
+    vim.g.neovide_padding_top = 0
+    vim.g.neovide_padding_bottom = 0
+    vim.g.neovide_padding_right = 10
+    vim.g.neovide_padding_left = 10
+
+    vim.g.neovide_scale_factor = 1.0
+    local change_scale_factor = function(delta)
+        vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+    end
+    vim.keymap.set("n", "<C-=>", function()
+        change_scale_factor(1.25)
+    end)
+    vim.keymap.set("n", "<C-->", function()
+        change_scale_factor(1 / 1.25)
+    end)
+
+    vim.g.experimental_layer_grouping = true
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -48,8 +86,8 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"
 -- Pumblend and WinBlend for translucent floats
-vim.opt.pumblend = 5
-vim.opt.winbl = 0
+vim.opt.pumblend = 10
+vim.opt.winbl = 10
 
 vim.opt.wrap = false
 
@@ -95,7 +133,7 @@ vim.opt.inccommand = "split"
 vim.g.netrw_banner = false
 
 -- Show which line your cursor is on
--- vim.opt.cursorline = true
+vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 
@@ -667,7 +705,7 @@ require("lazy").setup({
             vim.diagnostic.config {
                 float = {
                     focusable = true,
-                    border = "single",
+                    -- border = "single",
                 },
             }
 
@@ -702,7 +740,20 @@ require("lazy").setup({
                 --    https://github.com/pmizio/typescript-tools.nvim
                 --
                 -- But for many setups, the LSP (`tsserver`) will work just fine
-                tsserver = {},
+                tsserver = {
+                    init_options = {
+                        preferences = {
+                            includeInlayParameterNameHints = "all",
+                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = true,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                            importModuleSpecifierPreference = "non-relative",
+                        },
+                    },
+                },
 
                 eslint = {},
                 html = {},
@@ -736,6 +787,7 @@ require("lazy").setup({
                             completion = {
                                 callSnippet = "Replace",
                             },
+                            -- hint = { enable = true },
                             -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                             -- diagnostics = { disable = { 'missing-fields' } },
                         },
@@ -1106,12 +1158,6 @@ require("lazy").setup({
             --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
         end,
     },
-    {
-        "/nvim-treesitter/playground",
-        config = function()
-            vim.keymap.set("n", "<leader>io", "<cmd>TSHighlightCapturesUnderCursor<CR>")
-        end,
-    },
 
     -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -1129,14 +1175,6 @@ require("lazy").setup({
     },
     {
         "rktjmp/shipwright.nvim",
-    },
-    {
-        "edluffy/hologram.nvim",
-        config = function()
-            require("hologram").setup {
-                auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
-            }
-        end,
     },
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`

@@ -74,39 +74,52 @@ local cc = s(
     "cc",
     fmt(
         [[
-    #include <iostream>
-    using namespace std;
-    #define ll long long
+/*
+ * Author: CosecSecCot
+ * Created: {d}
+ * */
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+using ld = long double;
+using ull = unsigned long long;
+#define pb push_back
+#define fi first
+#define se second
+#define all(x) (x).begin(), (x).end()
+#define yn(x) cout << (x ? "YES" : "NO")
+#define yes cout << "YES"
+#define no cout << "NO"
+#define ynnl(x) cout << (x ? "YES\n" : "NO\n")
+#define yesnl cout << "YES\n"
+#define nonl cout << "NO\n"
+#define fastio                                                                                                         \
+    ios::sync_with_stdio(false);                                                                                       \
+    cin.tie(nullptr);                                                                                                  \
+    cout.tie(nullptr)
 
-    void solve()
-    {{
-        {}
+void solve() {{
+    {}
+}}
+
+signed main() {{
+    fastio;
+#ifndef ONLINE_JUDGE
+    freopen("input", "r", stdin);
+#endif
+    int test = 1;
+    cin >> test;
+    while (test--) {{
+        solve();
+        cout << '\n';
     }}
 
-    int main()
-    {{
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
-        cout.tie(nullptr);
-    #ifndef ONLINE_JUDGE 
-        freopen("input", "r", stdin); 
-        freopen("output", "w", stdout); 
-    #endif 
-
-
-        int test = 1;
-        cin >> test;
-        while (test --)
-        {{
-            solve();
-            cout << '\n';
-        }}
-
-        return 0;
-    }}
+    return 0;
+}}
     ]],
         {
-            i(0, ""),
+            d = t(os.date "%A, %d %B %Y, %I:%M:%S %p"),
+            i(1, ""),
         }
     )
 )
