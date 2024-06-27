@@ -28,17 +28,21 @@ local generator = function()
         return ""
     end)
 
+    ---@diagnostic disable-next-line: missing-parameter
     local diagnostic_display = diagnostic.make_buffer()
 
     local items = {
-        { mode, required = true },
-        { git_branch },
+        -- { mode, required = true },
+        -- { git_branch },
+        -- { " " },
+        -- { sections.split, required = true },
         { " " },
-        { sections.split, required = true },
         { file_icon },
         { sections.maximum_width(builtin.tail_file, 0.60), required = true },
         { sections.collapse_builtin { { " " }, { builtin.modified_flag } } },
         { sections.split, required = true },
+        { git_branch },
+        { " " },
         { diagnostic_display },
         { " [" },
         { builtin.line_with_width(3) },
