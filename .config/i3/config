@@ -222,3 +222,5 @@ bindsym $mod+Shift+s exec --no-startup-id maim --format=png --select "/home/$USE
 
 ## Ricing ?
 # default_border none
+exec --no-startup-id nitrogen --set-auto ~/Downloads/nan-zhou-eu96i9fB__4-unsplash.jpg
+exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
