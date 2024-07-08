@@ -273,6 +273,12 @@ return {
     {
         "atelierbram/Base2Tone-nvim",
     },
+    {
+        "mswift42/vim-themes",
+    },
+    {
+        "lunacookies/vim-colors-xcode",
+    },
     -- {
     --     "LazyVim/LazyVim",
     --     opts = {

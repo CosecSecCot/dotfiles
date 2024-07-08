@@ -83,43 +83,101 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 using ull = unsigned long long;
+#define INF 1e18 + 0ll
 #define pb push_back
 #define fi first
 #define se second
-#define all(x) (x).begin(), (x).end()
-#define len(x) ((ll)(x).size())
-#define sum(x) accumulate(all(x), 0)
-#define yn(x) cout << (x ? "YES" : "NO")
+#define all_(x) (x).begin(), (x).end()
+#define len_(x) ((ll)(x).size())
+#define sum_(x) accumulate(all(x), 0)
+#define yn_(x) cout << (x ? "YES" : "NO")
 #define yes cout << "YES"
 #define no cout << "NO"
-#define ynnl(x) cout << (x ? "YES\n" : "NO\n")
+#define ynnl_(x) cout << (x ? "YES\n" : "NO\n")
 #define yesnl cout << "YES\n"
 #define nonl cout << "NO\n"
-#define fastio                                                                                                         \
+#define fastio_                                                                                                        \
     ios::sync_with_stdio(false);                                                                                       \
     cin.tie(nullptr);                                                                                                  \
     cout.tie(nullptr)
-#define __printvec(vec)                                                                                                \
-    {{                                                                                                                 \
-        cout << "[";                                                                                                   \
-        for (size_t i = 0; i < (vec).size(); ++i) {{                                                                     \
-            cout << (vec)[i];                                                                                            \
-            if (i != (vec).size() - 1)                                                                                   \
-                cout << ", ";                                                                                          \
-        }}                                                                                                             \
-        cout << "]" << '\n';                                                                                           \
+template <typename T, typename = void> struct is_container : std::false_type {{}};
+template <typename T> struct is_container<T, std::void_t<typename T::value_type>> : std::true_type {{}};
+template <typename T> constexpr bool is_container_v = is_container<T>::value;
+template <typename T> inline void _print(T t) {{ cerr << t; }}
+inline void _print(bool t) {{ cerr << (t ? "true" : "false"); }}
+inline void _print(nullptr_t t) {{ cerr << "nullptr"; }}
+template <class T1, class T2> inline void _print(pair<T1, T2> p) {{
+    cerr << "(";
+    _print(p.fi);
+    cerr << ",";
+    _print(p.se);
+    cerr << ")";
+}}
+template <class T> inline void _print(vector<T> v, int depth = 0) {{
+    if constexpr (is_container_v<T>) {{
+        cerr << "[\n";
+        ll idx = 0;
+        for (const auto &i : v) {{
+            cerr << string(4 * (depth + 1), ' ');
+            _print(i, depth + 1);
+            if (idx != len_(v) - 1)
+                cerr << ",";
+            idx++;
+            cerr << '\n';
+        }}
+        cerr << string(4 * (depth), ' ') << "]";
+    }} else {{
+        cerr << "[ ";
+        ll idx = 0;
+        for (const auto &i : v) {{
+            _print(i);
+            if (idx != len_(v) - 1)
+                cerr << ", ";
+            idx++;
+        }}
+        cerr << " ]";
     }}
-#define __print2dvec(vec)                                                                                              \
-    {{                                                                                                                 \
-        cout << "[" << '\n';                                                                                           \
-        for (auto &v : (vec)) {{                                                                                         \
-            cout << '\t';                                                                                              \
-            __printvec(v);                                                                                             \
-        }}                                                                                                             \
-        cout << "]" << '\n';                                                                                           \
+}}
+template <typename T> inline void _print(set<T> s) {{
+    cerr << "{{ ";
+    ll idx = 0;
+    for (const auto &i : s) {{
+        _print(i);
+        if (idx != len_(s) - 1)
+            cerr << ", ";
+        idx++;
     }}
-#define __printpair(pair) cout << "<" << pair.fi << ", " << pair.se << ">" << '\n'
+    cerr << " }}";
+}}
+template <typename T1, typename T2> inline void _print(map<T1, T2> m) {{
+    cerr << "{{\n";
+    for (const auto &[x, y] : m) {{
+        cerr << string(4, ' ');
+        _print(x);
+        cerr << ": ";
+        _print(y);
+        cerr << "\n";
+    }}
+    cerr << "}}";
+}}
+template <typename... Args> void __dbg_print_args(Args... args) {{ ((cerr << args << " "), ...); }}
+#ifndef ONLINE_JUDGE
+#define dbg(x, ...)                                                                                                    \
+    cerr << #x << ": ";                                                                                                \
+    _print(x);                                                                                                         \
+    cerr << " ";                                                                                                       \
+    __dbg_print_args(__VA_ARGS__);                                                                                     \
+    cerr << '\n';
+#define dbgp(...)                                                                                                      \
+    __dbg_print_args(__VA_ARGS__);                                                                                     \
+    cerr << '\n';
+#else
+#define dbg(x, ...)
+#define dbgp(...)
+#endif
 
+constexpr const ll MOD = 1000000007;
+constexpr const ll MOD2 = 998244353;
 const vector<pair<int, int>> dir4 = {{{{0, -1}}, {{1, 0}}, {{0, 1}}, {{-1, 0}}}};
 const vector<pair<int, int>> dir8 = {{{{0, -1}}, {{1, -1}}, {{1, 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}}, {{-1, 0}}, {{-1, -1}}}};
 
@@ -128,7 +186,7 @@ void solve() {{
 }}
 
 signed main() {{
-    fastio;
+    fastio_;
 #ifndef ONLINE_JUDGE
     freopen("input", "r", stdin);
 #endif
@@ -305,6 +363,28 @@ void dfs(int curr, vector<vector<int>> &adj_list, vector<bool> &visited{}) {{
 )
 table.insert(snippets, dfsadjlist)
 
+local dfsweighted = s(
+    "dfsw",
+    fmt(
+        [[
+void dfsw(int curr, vector<vector<pair<int, int>>> &adj_list, vector<bool> &visited{}) {{
+    visited[curr] = true;
+    {}
+    for (auto next_node : adj_list[curr]) {{
+        if (!visited[next_node.first]) {{
+            dfsw(next_node.first, adj_list, visited);
+        }}
+    }}
+}}
+    ]],
+        {
+            i(1, ", /* more parameters */"),
+            i(0, "/* any condition */"),
+        }
+    )
+)
+table.insert(snippets, dfsweighted)
+
 local dfsgrid = s(
     "dfsgrid",
     fmt(
@@ -357,6 +437,35 @@ bool bipertite2(int curr, vector<vector<int>> &adj_list, vector<int> &color, int
     )
 )
 table.insert(snippets, bipertite2)
+
+local graphcycledfs = s(
+    "graphcycledfs",
+    fmt(
+        [[
+bool graphcycledfs(int curr, vector<vector<int>> &adj_list, vector<bool> &visited, int currparent{}) {{
+    visited[curr] = true;
+    {}
+    for (auto next_node : adj_list[curr]) {{
+        if (!visited[next_node]) {{
+            if (graphcycledfs(next_node, adj_list, visited, curr)) {{
+                return true;
+            }}
+        }} else if (next_node != currparent) {{
+            {}
+            return true;
+        }}
+    }}
+    return false;
+}}
+    ]],
+        {
+            i(1, ", /* parameters */"),
+            i(2, "/* pre condition */"),
+            i(3, "/* do something before return */"),
+        }
+    )
+)
+table.insert(snippets, graphcycledfs)
 
 local bfsgrid = s(
     "bfsgrid",
@@ -411,20 +520,49 @@ bool bfs(int x, int y, vector<vector<{}>> &grid, vector<vector<bool>> &visited) 
 )
 table.insert(snippets, bfsgrid)
 
+local bfsadj = s(
+    "bfsadj",
+    fmt(
+        [[
+void bfs(vector<vector<int>> &adj_list, int src, vector<bool> &visited) {{
+    queue<int> q;
+    q.push(src);
+
+    visited[src] = true;
+
+    while (!q.empty()) {{
+        int curr = q.front();
+        q.pop();
+        // cout << currentNode << " ";
+
+        for (int next_node : adj_list[curr]) {{
+            if (!visited[next_node]) {{
+                visited[next_node] = true;
+                q.push(next_node);
+            }}
+        }}
+    }}
+}}
+    ]],
+        {}
+    )
+)
+table.insert(snippets, bfsadj)
+
 local dijkstra = s(
     "dijkstra",
     fmt(
         [[
-vector<int> dijkstra(vector<vector<pair<int, int>>> &adj_list, int src) {{
-    vector<int> dist(len(adj_list), INT_MAX);
+vector<{}> dijkstra(vector<vector<pair<{}, {}>>> &adj_list, {} src) {{
+    vector<{}> dist(len(adj_list), {});
     dist[src] = 0;
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    priority_queue<pair<{}, {}>, vector<pair<{}, {}>>, greater<pair<{}, {}>>> pq;
     pq.push({{0, src}});
 
     while (!pq.empty()) {{
-        int currdist = pq.top().first;
-        int currnode = pq.top().second;
+        {} currdist = pq.top().first;
+        {} currnode = pq.top().second;
         pq.pop();
 
         if (currdist > dist[currnode]) {{
@@ -432,10 +570,10 @@ vector<int> dijkstra(vector<vector<pair<int, int>>> &adj_list, int src) {{
         }}
 
         for (auto &neighbour : adj_list[currnode]) {{
-            int neighbour_node = neighbour.first;
-            int weight = neighbour.second;
+            {} neighbour_node = neighbour.first;
+            {} weight = neighbour.second;
 
-            int nextdist = currdist + weight;
+            {} nextdist = currdist + weight;
             if (nextdist < dist[neighbour_node]) {{
                 dist[neighbour_node] = nextdist;
                 pq.push({{nextdist, neighbour_node}});
@@ -446,7 +584,25 @@ vector<int> dijkstra(vector<vector<pair<int, int>>> &adj_list, int src) {{
     return dist;
 }}
     ]],
-        {}
+        {
+            i(1, "int"),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            i(2, "INT_MAX"),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+        }
     )
 )
 table.insert(snippets, dijkstra)
@@ -455,16 +611,16 @@ local dijkstrapath = s(
     "dijkstrapath",
     fmt(
         [[
-vector<pair<int, int>> dijkstra(vector<vector<pair<int, int>>> &adj_list, int src) {{
-    vector<pair<int, int>> dist(len(adj_list), {{-1, INT_MAX}});
+vector<pair<{}, {}>> dijkstra(vector<vector<pair<{}, {}>>> &adj_list, {} src) {{
+    vector<pair<{}, {}>> dist(len(adj_list), {{-1, {}}});
     dist[src] = {{-1, 0}};
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    priority_queue<pair<{}, {}>, vector<pair<{}, {}>>, greater<pair<{}, {}>>> pq;
     pq.push({{0, src}});
 
     while (!pq.empty()) {{
-        int currdist = pq.top().first;
-        int currnode = pq.top().second;
+        {} currdist = pq.top().first;
+        {} currnode = pq.top().second;
         pq.pop();
 
         if (currdist > dist[currnode].second) {{
@@ -472,10 +628,10 @@ vector<pair<int, int>> dijkstra(vector<vector<pair<int, int>>> &adj_list, int sr
         }}
 
         for (auto &neighbour : adj_list[currnode]) {{
-            int neighbour_node = neighbour.first;
-            int weight = neighbour.second;
+            {} neighbour_node = neighbour.first;
+            {} weight = neighbour.second;
 
-            int nextdist = currdist + weight;
+            {} nextdist = currdist + weight;
             if (nextdist < dist[neighbour_node].second) {{
                 dist[neighbour_node].second = nextdist;
                 dist[neighbour_node].first = currnode;
@@ -487,10 +643,119 @@ vector<pair<int, int>> dijkstra(vector<vector<pair<int, int>>> &adj_list, int sr
     return dist;
 }}
     ]],
-        {}
+        {
+            i(1, "int"),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            i(2, "INT_MAX"),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+            rep(1),
+        }
     )
 )
 table.insert(snippets, dijkstrapath)
+
+local floyd = s(
+    "floyd",
+    fmt(
+        [[
+vector<vector<int>> floydWarshall(const vector<vector<pair<int, int>>> &graph) {{
+    int n = graph.size();
+    vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
+    for (int u = 1; u < n; u++) {{
+        for (auto &[v, weight] : graph[u]) {{
+            dist[u][v] = min(dist[u][v], weight);
+        }}
+    }}
+
+    for (int u = 1; u < n; u++) {{
+        dist[u][u] = 0;
+    }}
+
+    for (int k = 1; k < n; k++) {{
+        for (int i = 1; i < n; i++) {{
+            for (int j = 1; j < n; j++) {{
+                if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX) {{
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                }}
+            }}
+        }}
+    }}
+
+    return dist;
+}}
+    ]],
+        {}
+    )
+)
+table.insert(snippets, floyd)
+
+local bellmanford = s(
+    "bellmanford",
+    fmt(
+        [[
+vector<ll> bellmanFord(vector<Edge> &edges, int n, int src, int &last) {{
+    vector<ll> d(n + 1, LLONG_MAX);
+    vector<int> p(n + 1, -1);
+    d[src] = 0;
+    int x = -1;
+    for (int i = 0; i < n - 1; ++i) {{
+        x = -1;
+        for (const auto &e : edges) {{
+            if (d[e.src] < LLONG_MAX) {{
+                if (d[e.dest] > d[e.src] + e.weight) {{
+                    d[e.dest] = max(LLONG_MIN, d[e.src] + e.weight);
+                    p[e.dest] = e.src;
+                    x = e.dest;
+                }}
+            }}
+        }}
+    }}
+
+    last = x;
+
+    // if (x == -1) {{
+    // no cycles
+    return d;
+    // }}
+
+    // not working exactly right
+    //
+    // int y = x;
+    // for (int i = 0; i < n; ++i)
+    //     y = p[y];
+    //
+    // vector<int> path;
+    // for (int cur = y;; cur = p[cur]) {{
+    //     path.push_back(cur);
+    //     if (cur == y && path.size() > 1)
+    //         break;
+    // }}
+    // reverse(all(path));
+    //
+    // cout << "Negative cycle: ";
+    // for (int u : path)
+    //     cout << u << ' ';
+}}
+    ]],
+        {}
+    )
+)
+table.insert(snippets, floyd)
+
 -- End Refactoring --
 
 return snippets, autosnippets
