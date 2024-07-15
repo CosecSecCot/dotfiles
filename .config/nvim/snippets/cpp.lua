@@ -79,6 +79,9 @@ local cc = s(
  * Created: {d}
  * */
 #include <bits/stdc++.h>
+#ifndef ONLINE_JUDGE
+#include <bits/cosec-debug.h>
+#endif
 using namespace std;
 using ll = long long;
 using ld = long double;
@@ -87,79 +90,20 @@ using ull = unsigned long long;
 #define pb push_back
 #define fi first
 #define se second
-#define all_(x) (x).begin(), (x).end()
-#define len_(x) ((ll)(x).size())
-#define sum_(x) accumulate(all(x), 0)
-#define yn_(x) cout << (x ? "YES" : "NO")
+#define _all(x) (x).begin(), (x).end()
+#define _allr(x) (x).rbegin(), (x).rend()
+#define _len(x) ((ll)(x).size())
+#define _sum(x) accumulate(_all(x), 0)
+#define _yn(x) cout << (x ? "YES" : "NO")
 #define yes cout << "YES"
 #define no cout << "NO"
-#define ynnl_(x) cout << (x ? "YES\n" : "NO\n")
+#define _ynnl(x) cout << (x ? "YES\n" : "NO\n")
 #define yesnl cout << "YES\n"
 #define nonl cout << "NO\n"
 #define fastio_                                                                                                        \
     ios::sync_with_stdio(false);                                                                                       \
     cin.tie(nullptr);                                                                                                  \
     cout.tie(nullptr)
-template <typename T, typename = void> struct is_container : std::false_type {{}};
-template <typename T> struct is_container<T, std::void_t<typename T::value_type>> : std::true_type {{}};
-template <typename T> constexpr bool is_container_v = is_container<T>::value;
-template <typename T> inline void _print(T t) {{ cerr << t; }}
-inline void _print(bool t) {{ cerr << (t ? "true" : "false"); }}
-inline void _print(nullptr_t t) {{ cerr << "nullptr"; }}
-template <class T1, class T2> inline void _print(pair<T1, T2> p) {{
-    cerr << "(";
-    _print(p.fi);
-    cerr << ",";
-    _print(p.se);
-    cerr << ")";
-}}
-template <class T> inline void _print(vector<T> v, int depth = 0) {{
-    if constexpr (is_container_v<T>) {{
-        cerr << "[\n";
-        ll idx = 0;
-        for (const auto &i : v) {{
-            cerr << string(4 * (depth + 1), ' ');
-            _print(i, depth + 1);
-            if (idx != len_(v) - 1)
-                cerr << ",";
-            idx++;
-            cerr << '\n';
-        }}
-        cerr << string(4 * (depth), ' ') << "]";
-    }} else {{
-        cerr << "[ ";
-        ll idx = 0;
-        for (const auto &i : v) {{
-            _print(i);
-            if (idx != len_(v) - 1)
-                cerr << ", ";
-            idx++;
-        }}
-        cerr << " ]";
-    }}
-}}
-template <typename T> inline void _print(set<T> s) {{
-    cerr << "{{ ";
-    ll idx = 0;
-    for (const auto &i : s) {{
-        _print(i);
-        if (idx != len_(s) - 1)
-            cerr << ", ";
-        idx++;
-    }}
-    cerr << " }}";
-}}
-template <typename T1, typename T2> inline void _print(map<T1, T2> m) {{
-    cerr << "{{\n";
-    for (const auto &[x, y] : m) {{
-        cerr << string(4, ' ');
-        _print(x);
-        cerr << ": ";
-        _print(y);
-        cerr << "\n";
-    }}
-    cerr << "}}";
-}}
 template <typename... Args> void __dbg_print_args(Args... args) {{ ((cerr << args << " "), ...); }}
 #ifndef ONLINE_JUDGE
 #define dbg(x, ...)                                                                                                    \
@@ -181,6 +125,8 @@ constexpr const ll MOD2 = 998244353;
 const vector<pair<int, int>> dir4 = {{{{0, -1}}, {{1, 0}}, {{0, 1}}, {{-1, 0}}}};
 const vector<pair<int, int>> dir8 = {{{{0, -1}}, {{1, -1}}, {{1, 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}}, {{-1, 0}}, {{-1, -1}}}};
 
+{}
+
 void solve() {{
     {}
 }}
@@ -189,6 +135,7 @@ signed main() {{
     fastio_;
 #ifndef ONLINE_JUDGE
     freopen("input", "r", stdin);
+    freopen("err", "w", stderr);
 #endif
     int test = 1;
     cin >> test;
@@ -225,6 +172,7 @@ signed main() {{
                 return res
             end),
             i(1, ""),
+            i(2, ""),
         }
     )
 )
