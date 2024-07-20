@@ -79,72 +79,38 @@ local cc = s(
  * Created: {d}
  * */
 #include <bits/stdc++.h>
-#ifndef ONLINE_JUDGE
-#include <bits/cosec-debug.h>
-#endif
 using namespace std;
-using ll = long long;
-using ld = long double;
-using ull = unsigned long long;
-#define INF 1e18 + 0ll
-#define pb push_back
-#define fi first
-#define se second
-#define _all(x) (x).begin(), (x).end()
-#define _allr(x) (x).rbegin(), (x).rend()
-#define _len(x) ((ll)(x).size())
-#define _sum(x) accumulate(_all(x), 0)
-#define _yn(x) cout << (x ? "YES" : "NO")
-#define yes cout << "YES"
-#define no cout << "NO"
-#define _ynnl(x) cout << (x ? "YES\n" : "NO\n")
-#define yesnl cout << "YES\n"
-#define nonl cout << "NO\n"
-#define fastio_                                                                                                        \
-    ios::sync_with_stdio(false);                                                                                       \
-    cin.tie(nullptr);                                                                                                  \
-    cout.tie(nullptr)
-template <typename... Args> void __dbg_print_args(Args... args) {{ ((cerr << args << " "), ...); }}
 #ifndef ONLINE_JUDGE
-#define dbg(x, ...)                                                                                                    \
-    cerr << #x << ": ";                                                                                                \
-    _print(x);                                                                                                         \
-    cerr << " ";                                                                                                       \
-    __dbg_print_args(__VA_ARGS__);                                                                                     \
-    cerr << '\n';
-#define dbgp(...)                                                                                                      \
-    __dbg_print_args(__VA_ARGS__);                                                                                     \
-    cerr << '\n';
+#include "bits/cosec-debug.h"
 #else
 #define dbg(x, ...)
 #define dbgp(...)
 #endif
 
-constexpr const ll MOD = 1000000007;
-constexpr const ll MOD2 = 998244353;
-const vector<pair<int, int>> dir4 = {{{{0, -1}}, {{1, 0}}, {{0, 1}}, {{-1, 0}}}};
-const vector<pair<int, int>> dir8 = {{{{0, -1}}, {{1, -1}}, {{1, 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}}, {{-1, 0}}, {{-1, -1}}}};
+#define _all(x) (x).begin(), (x).end()
+#define _allr(x) (x).rbegin(), (x).rend()
 
-{}
+constexpr const int64_t MOD = 1000000007;
+constexpr const int64_t MOD1 = 998244353;
 
-void solve() {{
-    {}
-}}
-
-signed main() {{
-    fastio_;
+int main() {{
+        ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 #ifndef ONLINE_JUDGE
-    freopen("input", "r", stdin);
-    freopen("err", "w", stderr);
+        freopen("input", "r", stdin);
+        freopen("err", "w", stderr);
 #endif
-    int test = 1;
-    cin >> test;
-    while (test--) {{
-        solve();
-        cout << '\n';
-    }}
+        auto run_test = []() {{
+                {}
+        }};
 
-    return 0;
+        int TC = 1;
+        cin >> TC;
+        while (TC--) {{
+                run_test();
+                cout << '\n';
+        }}
+
+        return 0;
 }}
     ]],
         {
@@ -172,7 +138,7 @@ signed main() {{
                 return res
             end),
             i(1, ""),
-            i(2, ""),
+            -- i(2, ""),
         }
     )
 )
@@ -266,13 +232,25 @@ int main() {{
 table.insert(snippets, aoc)
 
 -- ## ALGORITHMS ##
+
+local graphdirs = s(
+    "graphdirs",
+    fmt(
+        [[
+const vector<pair<int, int>> dir4 = {{{{0, -1}}, {{1, 0}}, {{0, 1}}, {{-1, 0}}}};
+const vector<pair<int, int>> dir8 = {{{{0, -1}}, {{1, -1}}, {{1, 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}}, {{-1, 0}}, {{-1, -1}}}};
+        ]],
+        {}
+    )
+)
+
 local graphinp = s(
     "graphinp",
     fmt(
         [[
     int n, m;
     cin >> n >> m;
-    vector<vector<int>> graph;
+    vector<vector<int>> graph(n + 1);
     for (int i = 0; i < m; i++) {{
         int u, v;
         cin >> u >> v;
@@ -702,7 +680,50 @@ vector<ll> bellmanFord(vector<Edge> &edges, int n, int src, int &last) {{
         {}
     )
 )
-table.insert(snippets, floyd)
+table.insert(snippets, bellmanford)
+
+local dsu = s(
+    "dsu",
+    fmt(
+        [[
+class DSU {{
+private:
+    vector<int> parent, sz;
+
+public:
+    DSU(int n) {{
+        sz.resize(n + 1, 1);
+        parent.resize(n + 1);
+        iota(parent.begin(), parent.end(), 0);
+    }}
+
+    int find(int node) {{
+        if (node == parent[node])
+            return node;
+
+        return parent[node] = find(parent[node]); // path compression
+    }}
+
+    void unite(int u, int v) {{
+        int pu = find(u);
+        int pv = find(v);
+        if (pu == pv)
+            return; // already connected
+
+        if (sz[pu] < sz[pv]) {{
+            parent[pu] = pv;
+            sz[pv] += sz[pu];
+        }} else {{
+            parent[pv] = pu;
+            sz[pu] += sz[pv];
+        }}
+    }}
+}};
+    ]],
+        {}
+    )
+)
+table.insert(snippets, dsu)
 
 -- End Refactoring --
 
