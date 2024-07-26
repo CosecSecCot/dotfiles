@@ -87,25 +87,19 @@ using namespace std;
 #define dbgp(...)
 #endif
 
-#define _all(x) (x).begin(), (x).end()
-#define _allr(x) (x).rbegin(), (x).rend()
-
-constexpr const int64_t MOD = 1000000007;
-constexpr const int64_t MOD1 = 998244353;
+void run_test() {{
+        {}
+}};
 
 int main() {{
         ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 #ifndef ONLINE_JUDGE
         freopen("input", "r", stdin);
-        freopen("err", "w", stderr);
+        // freopen("err", "w", stderr);
 #endif
-        auto run_test = []() {{
-                {}
-        }};
-
         int TC = 1;
         cin >> TC;
-        while (TC--) {{
+        for (int t = 1; t <= TC; t++) {{
                 run_test();
                 cout << '\n';
         }}
@@ -137,6 +131,11 @@ int main() {{
                 )
                 return res
             end),
+            -- problem = f(function(_, snip)
+            --     local res, env = {}, snip.env
+            --     table.insert(res, env.TM_FILENAME_BASE)
+            --     return res
+            -- end),
             i(1, ""),
             -- i(2, ""),
         }
@@ -231,6 +230,47 @@ int main() {{
 )
 table.insert(snippets, aoc)
 
+local alle = s(
+    "alle",
+    fmt(
+        [[
+        {}.begin(), {}.end()
+        ]],
+        {
+            i(1, ""),
+            rep(1),
+        }
+    )
+)
+table.insert(snippets, alle)
+
+local allr = s(
+    "allr",
+    fmt(
+        [[
+        {}.rbegin(), {}.rend()
+        ]],
+        {
+            i(1, ""),
+            rep(1),
+        }
+    )
+)
+table.insert(snippets, allr)
+
+local mod = s(
+    "mod",
+    fmt(
+        [[
+        constexpr const int64_t MOD = {};
+        ]],
+        {
+            i(1, "1000000007"),
+        }
+    )
+)
+table.insert(snippets, mod)
+
 -- ## ALGORITHMS ##
 
 local graphdirs = s(
@@ -243,6 +283,7 @@ const vector<pair<int, int>> dir8 = {{{{0, -1}}, {{1, -1}}, {{1, 0}}, {{1, 1}}, 
         {}
     )
 )
+table.insert(snippets, graphdirs)
 
 local graphinp = s(
     "graphinp",

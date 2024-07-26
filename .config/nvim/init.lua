@@ -1,6 +1,5 @@
 -- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- See `:help mapleader` NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -8,15 +7,23 @@ vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
 if vim.g.neovide then
-    -- vim.o.guifont = "JetbrainsMono Nerd Font:h26"
-    vim.o.guifont = "Menlo:h24"
+    -- vim.cmd "colorscheme mellifluous"
+    -- vim.o.guifont = "JetbrainsMono Nerd Font:h20"
+    -- vim.o.guifont = "BigBlueTerm437 Nerd Font:h20"
+    -- vim.o.guifont = "DejaVu Sans Mono:h16"
+    vim.o.guifont = "DejaVuSansM Nerd Font:h16"
+    -- vim.o.guifont = "MartianMono Nerd Font:h18"
+    -- vim.o.guifont = "BlexMono Nerd Font:h18"
+    -- vim.o.guifont = "MesloLGS Nerd Font:h16"
+    -- vim.o.guifont = "Menlo:h24"
+    -- vim.o.guifont = "SFMono Nerd Font:h16"
 
-    vim.g.neovide_scroll_animation_length = 0.1
-    -- vim.g.neovide_cursor_animation_length = 0.006
-    vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_scroll_animation_length = 0.2
+    vim.g.neovide_cursor_animation_length = 0.005
+    -- vim.g.neovide_cursor_animation_length = 0
 
-    vim.g.neovide_transparency = 0.95
-    vim.g.transparency = 0.95
+    -- vim.g.neovide_transparency = 0.95
+    -- vim.g.transparency = 0.95
 
     vim.g.neovide_floating_blur_amount_x = 5.0
     vim.g.neovide_floating_blur_amount_y = 5.0
@@ -26,10 +33,10 @@ if vim.g.neovide then
     vim.g.neovide_light_angle_degrees = 45
     vim.g.neovide_light_radius = 10
 
-    vim.g.neovide_padding_top = 0
-    vim.g.neovide_padding_bottom = 0
-    vim.g.neovide_padding_right = 10
-    vim.g.neovide_padding_left = 10
+    -- vim.g.neovide_padding_top = 0
+    -- vim.g.neovide_padding_bottom = 0
+    -- vim.g.neovide_padding_right = 10
+    -- vim.g.neovide_padding_left = 10
 
     vim.g.neovide_scale_factor = 1.0
     local change_scale_factor = function(delta)
@@ -131,6 +138,7 @@ vim.opt.inccommand = "split"
 
 -- Netrw Banner
 vim.g.netrw_banner = false
+vim.g.netrw_liststyle = 3
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
@@ -174,6 +182,7 @@ vim.diagnostic.config {
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { desc = "Exit terminal mode" })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -211,13 +220,13 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 --
 -- (IDK IF ITS WORKING OR NOT SO I COMMENTED THIS)
 --
--- vim.api.nvim_create_autocmd("TextYankPost", {
---     desc = "Highlight when yanking (copying) text",
---     group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
---     callback = function()
---         vim.highlight.on_yank()
---     end,
--- })
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -731,7 +740,7 @@ require("lazy").setup({
             --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
             local servers = {
                 clangd = {},
-                gopls = {},
+                -- gopls = {},
                 pyright = {},
                 rust_analyzer = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -1037,6 +1046,11 @@ require("lazy").setup({
                             luasnip.jump(-1)
                         end
                     end, { "i", "s" }),
+                    ["<C-j>"] = cmp.mapping(function()
+                        if luasnip.choice_active() then
+                            luasnip.change_choice(1)
+                        end
+                    end, { "i", "s" }),
 
                     -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
                     --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -1177,12 +1191,20 @@ require("lazy").setup({
         "rktjmp/shipwright.nvim",
     },
 
+    {
+        "ThePrimeagen/vim-with-me",
+    },
+    {
+        "searleser97/cpbooster.vim",
+    },
+
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
     --    This is the easiest way to modularize your config.
     --
     --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
     --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
     { import = "custom.plugins" },
+
     {
         { dir = "~/myfiles/cosec-twilight/", lazy = true },
     },
@@ -1193,6 +1215,20 @@ require("lazy").setup({
         -- border = "single",
     },
 })
+
+if vim.g.neovide then
+    -- vim.cmd "colorscheme iceberg"
+    -- vim.cmd "set background=light"
+
+    vim.cmd "colorscheme jellybeans-nvim"
+    -- vim.cmd "colorscheme alduin"
+    -- vim.cmd "colorscheme intellij"
+    -- vim.cmd "colorscheme xcodelight"
+    vim.cmd "TransparentDisable"
+else
+    vim.cmd "colorscheme cosec-twilight"
+    vim.cmd "TransparentEnable"
+end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=4 sts=4 sw=4 et
