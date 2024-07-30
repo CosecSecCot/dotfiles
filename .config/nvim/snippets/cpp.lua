@@ -78,14 +78,8 @@ local cc = s(
  * Author: CosecSecCot
  * Created: {d}
  * */
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
-#ifndef ONLINE_JUDGE
-#include "bits/cosec-debug.h"
-#else
-#define dbg(x, ...)
-#define dbgp(...)
-#endif
 
 void run_test() {{
         {}
@@ -93,13 +87,9 @@ void run_test() {{
 
 int main() {{
         ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-#ifndef ONLINE_JUDGE
-        freopen("input", "r", stdin);
-        // freopen("err", "w", stderr);
-#endif
-        int TC = 1;
-        cin >> TC;
-        for (int t = 1; t <= TC; t++) {{
+        int T = 1;
+        cin >> T;
+        while (T--) {{
                 run_test();
                 cout << '\n';
         }}
@@ -147,16 +137,13 @@ local boilerplate = s(
     "boilerplate",
     fmt(
         [[
-    #include <iostream>
+    #include <bits/stdc++.h>
     using namespace std;
-    #define ll long long
 
     {}
 
     int main() {{
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
-        cout.tie(nullptr);
+        ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     #ifndef ONLINE_JUDGE 
         freopen("input", "r", stdin); 
     #endif 
@@ -185,10 +172,7 @@ local leetcode = s(
 
     int main()
     {{
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
-        cout.tie(nullptr);
-
+        ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
         Solution solution;
 
         return 0;
@@ -270,6 +254,22 @@ local mod = s(
     )
 )
 table.insert(snippets, mod)
+
+local debug = s(
+    "debug",
+    fmt(
+        [[
+#ifndef ONLINE_JUDGE
+#include "bits/cosec-debug.h"
+#else
+#define dbg(x, ...)
+#define dbgp(...)
+#endif
+        ]],
+        {}
+    )
+)
+table.insert(snippets, debug)
 
 -- ## ALGORITHMS ##
 
