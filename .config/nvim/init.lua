@@ -170,7 +170,7 @@ vim.keymap.set(
 )
 
 vim.diagnostic.config {
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
     underline = true,
 }
@@ -327,6 +327,7 @@ require("lazy").setup({
         branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
             { -- If encountering errors, see telescope-fzf-native README for installation instructions
                 "nvim-telescope/telescope-fzf-native.nvim",
 
@@ -482,7 +483,7 @@ require("lazy").setup({
                 --
                 defaults = {
                     -- prompt_prefix = "  " .. icons.get "telescope" .. "  ",
-                    -- selection_caret = " ❯ ",
+                    selection_caret = " ❯ ",
                     -- entry_prefix = "   ",
                     layout_strategy = "horizontal",
                     layout_config = {
@@ -510,10 +511,15 @@ require("lazy").setup({
             local builtin = require "telescope.builtin"
             vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
             vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-            vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "[S]earch [F]iles" })
+            vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "[P]roject [F]iles" })
             -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
             -- vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-            vim.keymap.set("n", "<leader>ps", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+            vim.keymap.set(
+                "n",
+                "<leader>ps",
+                builtin.live_grep,
+                { desc = "[P]roject [S]earch by Grep" }
+            )
             vim.keymap.set(
                 "n",
                 "<leader>sd",
@@ -552,12 +558,49 @@ require("lazy").setup({
                 }
             end, { desc = "[S]earch [/] in Open Files" })
 
+            -- https://github.com/nvim-telescope/telescope.nvim/issues/2201
+            vim.keymap.set("n", "<leader>pS", function(_prompt_bufnr)
+                local action_state = require "telescope.actions.state"
+                local fb = require("telescope").extensions.file_browser
+                local live_grep = require("telescope.builtin").live_grep
+                local current_line = action_state.get_current_line()
+
+                fb.file_browser {
+                    files = false,
+                    depth = false,
+                    attach_mappings = function(_prompt_bufnr)
+                        require("telescope.actions").select_default:replace(function()
+                            local entry_path = action_state.get_selected_entry().Path
+                            local dir = entry_path:is_dir() and entry_path or entry_path:parent()
+                            local relative = dir:make_relative(vim.fn.getcwd())
+                            local absolute = dir:absolute()
+
+                            live_grep {
+                                results_title = relative .. "/",
+                                cwd = absolute,
+                                default_text = current_line,
+                            }
+                        end)
+
+                        return true
+                    end,
+                }
+            end, { desc = "[p]roject-wide [S]earch (in current directory)" })
+
             -- Shortcut for searching your Neovim configuration files
             vim.keymap.set("n", "<leader>sn", function()
                 builtin.find_files { cwd = vim.fn.stdpath "config" }
             end, { desc = "[S]earch [N]eovim files" })
         end,
     },
+
+    -- JAVA Setup before lspconfig
+    -- {
+    --     "nvim-java/nvim-java",
+    --     config = function()
+    --         require("java").setup()
+    --     end,
+    -- },
 
     { -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
@@ -787,6 +830,8 @@ require("lazy").setup({
                 bashls = {},
                 taplo = {},
 
+                -- jdtls = {},
+
                 lua_ls = {
                     -- cmd = {...},
                     -- filetypes = { ...},
@@ -839,7 +884,9 @@ require("lazy").setup({
                             capabilities,
                             server.capabilities or {}
                         )
-                        require("lspconfig")[server_name].setup(server)
+                        if server_name ~= "jdtls" then
+                            require("lspconfig")[server_name].setup(server)
+                        end
                     end,
                 },
             }
@@ -1191,13 +1238,6 @@ require("lazy").setup({
         "rktjmp/shipwright.nvim",
     },
 
-    {
-        "ThePrimeagen/vim-with-me",
-    },
-    {
-        "searleser97/cpbooster.vim",
-    },
-
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
     --    This is the easiest way to modularize your config.
     --
@@ -1220,15 +1260,17 @@ if vim.g.neovide then
     -- vim.cmd "colorscheme iceberg"
     -- vim.cmd "set background=light"
 
-    vim.cmd "colorscheme jellybeans-nvim"
+    -- vim.cmd "colorscheme jellybeans-nvim"
     -- vim.cmd "colorscheme alduin"
     -- vim.cmd "colorscheme intellij"
     -- vim.cmd "colorscheme xcodelight"
     vim.cmd "TransparentDisable"
 else
-    vim.cmd "colorscheme cosec-twilight"
-    vim.cmd "TransparentEnable"
+    -- vim.cmd "colorscheme cosec-twilight"
+    -- vim.cmd "TransparentEnable"
 end
+
+vim.cmd "colorscheme kanagawa"
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=4 sts=4 sw=4 et

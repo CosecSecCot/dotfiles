@@ -81,17 +81,11 @@ local cc = s(
 #include "bits/stdc++.h"
 using namespace std;
 
-void run_test() {{
-        {}
-}};
-
 int main() {{
         ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-        int T = 1;
-        cin >> T;
+        int T = 1; cin >> T;
         while (T--) {{
-                run_test();
-                cout << '\n';
+                {}
         }}
 
         return 0;
