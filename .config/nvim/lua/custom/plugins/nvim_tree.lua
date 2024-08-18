@@ -10,6 +10,7 @@ return {
         -- local nonicons_extention = require "nvim-nonicons.extentions.nvim-tree"
         nvimtree.setup {
             renderer = {
+                group_empty = true,
                 icons = {
                     --         -- glyphs = nonicons_extention.glyphs,
                     -- indent_markers = {
