@@ -6,7 +6,7 @@ set smartindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
-set guifont=Menlo:h24
+set guifont=DejavuSansM Nerd Font:h16
 " set guifont=JetbrainsMono Nerd Font:h26
 
 call plug#begin()
@@ -16,6 +16,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'jiangmiao/auto-pairs' " Auto Bracket Pair
 Plug 'SirVer/ultisnips' " UltiSnippets
 Plug 'mswift42/vim-themes' " Emacs Theme Pack
+Plug 'rafi/awesome-vim-colorschemes' " Awesome Vim Colorschemes
 
 call plug#end()
 

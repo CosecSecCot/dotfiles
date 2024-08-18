@@ -91,7 +91,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "auto"
 -- Pumblend and WinBlend for translucent floats
 vim.opt.pumblend = 10
 vim.opt.winbl = 10
@@ -483,17 +483,21 @@ require("lazy").setup({
                 --
                 defaults = {
                     -- prompt_prefix = "  " .. icons.get "telescope" .. "  ",
-                    selection_caret = " ❯ ",
+                    selection_caret = "❯ ",
                     -- entry_prefix = "   ",
                     layout_strategy = "horizontal",
                     layout_config = {
-                        -- width = 0.95,
-                        prompt_position = "top",
-                        preview_cutoff = 0,
+                        width = 0.90,
+                        -- prompt_position = "top",
+                        -- preview_cutoff = 0,
                     },
                     -- mappings = {
                     --     i = { ["<c-enter>"] = "to_fuzzy_refine" },
                     -- },
+                    file_ignore_patterns = {
+                        "node_modules",
+                        ".git",
+                    },
                 },
                 -- pickers = {}
                 extensions = {
@@ -511,7 +515,11 @@ require("lazy").setup({
             local builtin = require "telescope.builtin"
             vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
             vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-            vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "[P]roject [F]iles" })
+            vim.keymap.set("n", "<leader>pf", function()
+                builtin.find_files {
+                    hidden = true,
+                }
+            end, { desc = "[P]roject [F]iles" })
             -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
             -- vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
             vim.keymap.set(
@@ -591,6 +599,12 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>sn", function()
                 builtin.find_files { cwd = vim.fn.stdpath "config" }
             end, { desc = "[S]earch [N]eovim files" })
+            vim.keymap.set("n", "<leader>df", function()
+                builtin.find_files {
+                    cwd = "~/dotfiles",
+                    hidden = true,
+                }
+            end, { desc = "Search [D]ot[f]iles" })
         end,
     },
 
@@ -1068,7 +1082,7 @@ require("lazy").setup({
                     -- Accept ([y]es) the completion.
                     --  This will auto-import if your LSP supports it.
                     --  This will expand snippets if the LSP sent a snippet.
-                    ["<C-y>"] = cmp.mapping.confirm { select = true },
+                    ["<Tab>"] = cmp.mapping.confirm { select = true },
 
                     -- Manually trigger a completion from nvim-cmp.
                     --  Generally you don't need this, because nvim-cmp will display
@@ -1245,9 +1259,9 @@ require("lazy").setup({
     --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
     { import = "custom.plugins" },
 
-    {
-        { dir = "~/myfiles/cosec-twilight/", lazy = true },
-    },
+    -- {
+    --     { dir = "~/myfiles/cosec-twilight/", lazy = true },
+    -- },
 }, {
     ui = {
         -- If you are using a Nerd Font: set icons to an empty table which will use the
