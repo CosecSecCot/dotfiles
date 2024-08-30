@@ -123,10 +123,10 @@ return {
             ]]
 
             -- Custom border colors
-            vim.cmd [[
-              autocmd ColorScheme * hi NormalFloat guifg=#F9E7C0 guibg=#101010
-              autocmd ColorScheme * hi FloatBorder guifg=#F9E7C0 guibg=#101010
-            ]]
+            -- vim.cmd [[
+            --   autocmd ColorScheme * hi NormalFloat guifg=#F9E7C0 guibg=#101010
+            --   autocmd ColorScheme * hi FloatBorder guifg=#F9E7C0 guibg=#101010
+            -- ]]
         end,
     },
     {

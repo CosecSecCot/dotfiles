@@ -1,14 +1,8 @@
 live_config_reload: true
 
-window:
-  padding:
-    x: 0
-    y: 0
-  decorations: buttonless
-
 font:
   normal:
-    family: "JetbrainsMono Nerd Font"
+    family: "MesloLGS Nerd Font"
     style: Regular
   size: 17.0
 
@@ -23,36 +17,3 @@ bell:
   animation: EaseOutExpo
   color: '0xffffff'
   duration: 0
-
-keyboard:
-  bindings:
-    - { key: F11, action: ToggleFullscreen }
-
-colors:
-  primary:
-      background: '0x080808'
-      foreground: '0xc5c8c6'
-    # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x1d1f21'
-    cursor: '0xc5c8c6'
-
-  normal:
-    black:   '0x1d1f21'
-    red:     '0xcc6666'
-    green:   '0xb5bd68'
-    yellow:  '0xf0c674'
-    blue:    '0x81a2be'
-    magenta: '0xb294bb'
-    cyan:    '0x8abeb7'
-    white:   '0xc5c8c6'
-
-  bright:
-    black:   '0x969896'
-    red:     '0xde935f'
-    green:   '0x282a2e'
-    yellow:  '0x373b41'
-    blue:    '0xb4b7b4'
-    magenta: '0xe0e0e0'
-    cyan:    '0xa3685a'
-    white:   '0xffffff'

@@ -1,7 +1,7 @@
 # DisableFormat: true
 AccessModifierOffset: -4
 BasedOnStyle: LLVM
-IndentWidth: 8
+IndentWidth: 4
 ColumnLimit: 120
 AllowShortBlocksOnASingleLine: Empty
 AllowShortLambdasOnASingleLine: Empty
