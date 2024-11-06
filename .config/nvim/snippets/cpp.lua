@@ -81,7 +81,7 @@ local cc = s(
 #include "bits/stdc++.h"
 using namespace std;
 
-int main() {{
+int32_t main() {{
         ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
         int T = 1; cin >> T;
         while (T--) {{
@@ -126,6 +126,60 @@ int main() {{
     )
 )
 table.insert(snippets, cc)
+
+local cc1 = s(
+    "cc1",
+    fmt(
+        [[
+/*
+ * Author: CosecSecCot
+ * Created: {d}
+ * */
+#include "bits/stdc++.h"
+using namespace std;
+
+int32_t main() {{
+        ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+        {}
+
+        return 0;
+}}
+    ]],
+        {
+            -- d = t(os.date "%A, %d %B %Y, %I:%M:%S %p"),
+            -- time = t(vim.fn.strftime("%c", vim.fn.getftime "")),
+            d = f(function(_, snip)
+                local res, env = {}, snip.env
+                table.insert(
+                    res,
+                    " "
+                        .. env.CURRENT_DAY_NAME
+                        .. ", "
+                        .. env.CURRENT_DATE
+                        .. " "
+                        .. env.CURRENT_MONTH_NAME_SHORT
+                        .. " "
+                        .. env.CURRENT_YEAR
+                        .. " - "
+                        .. env.CURRENT_HOUR
+                        .. ":"
+                        .. env.CURRENT_MINUTE
+                        .. ":"
+                        .. env.CURRENT_SECOND
+                )
+                return res
+            end),
+            -- problem = f(function(_, snip)
+            --     local res, env = {}, snip.env
+            --     table.insert(res, env.TM_FILENAME_BASE)
+            --     return res
+            -- end),
+            i(1, ""),
+            -- i(2, ""),
+        }
+    )
+)
+table.insert(snippets, cc1)
 
 local boilerplate = s(
     "boilerplate",

@@ -843,6 +843,7 @@ require("lazy").setup({
                 -- htmx_lsp = {},
                 bashls = {},
                 taplo = {},
+                yamlls = {},
 
                 -- jdtls = {},
 
