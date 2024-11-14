@@ -11,12 +11,13 @@ if vim.g.neovide then
     -- vim.o.guifont = "JetbrainsMono Nerd Font:h20"
     -- vim.o.guifont = "BigBlueTerm437 Nerd Font:h20"
     -- vim.o.guifont = "DejaVu Sans Mono:h16"
-    vim.o.guifont = "DejaVuSansM Nerd Font:h16"
+    -- vim.o.guifont = "DejaVuSansM Nerd Font:h16"
     -- vim.o.guifont = "MartianMono Nerd Font:h18"
     -- vim.o.guifont = "BlexMono Nerd Font:h18"
     -- vim.o.guifont = "MesloLGS Nerd Font:h16"
     -- vim.o.guifont = "Menlo:h24"
     -- vim.o.guifont = "SFMono Nerd Font:h16"
+    vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
 
     vim.g.neovide_scroll_animation_length = 0.2
     vim.g.neovide_cursor_animation_length = 0.005
@@ -395,6 +396,16 @@ require("lazy").setup({
                                 color = "#a80030",
                                 name = "GoSum",
                             },
+                            [".classpath"] = {
+                                icon = "",
+                                color = "#4b32c3",
+                                name = "EclipseClasspath",
+                            },
+                            [".project"] = {
+                                icon = "",
+                                color = "#4b32c3",
+                                name = "EclipseProject",
+                            },
                         },
                         override_by_extension = {
                             ["go"] = {
@@ -603,6 +614,7 @@ require("lazy").setup({
                 builtin.find_files {
                     cwd = "~/dotfiles",
                     hidden = true,
+                    prompt_title = "Dotfiles",
                 }
             end, { desc = "Search [D]ot[f]iles" })
         end,
@@ -805,8 +817,8 @@ require("lazy").setup({
                 -- Some languages (like typescript) have entire language plugins that can be useful:
                 --    https://github.com/pmizio/typescript-tools.nvim
                 --
-                -- But for many setups, the LSP (`tsserver`) will work just fine
-                tsserver = {
+                -- But for many setups, the LSP (`ts_ls`) will work just fine
+                ts_ls = {
                     init_options = {
                         preferences = {
                             includeInlayParameterNameHints = "all",
@@ -845,6 +857,7 @@ require("lazy").setup({
                 taplo = {},
 
                 -- jdtls = {},
+                lemminx = {},
 
                 lua_ls = {
                     -- cmd = {...},
@@ -891,7 +904,7 @@ require("lazy").setup({
                         local server = servers[server_name] or {}
                         -- This handles overriding only values explicitly passed
                         -- by the server configuration above. Useful when disabling
-                        -- certain features of an LSP (for example, turning off formatting for tsserver)
+                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
                         server.capabilities = vim.tbl_deep_extend(
                             "force",
                             {},
@@ -1285,6 +1298,7 @@ else
 end
 
 vim.cmd "colorscheme kanagawa"
+-- vim.cmd "colorscheme cosec-twilight"
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=4 sts=4 sw=4 et
