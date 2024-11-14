@@ -47,8 +47,8 @@ local config = {
             .. "/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar",
         -- TODO Update this to point to the correct jdtls subdirectory for your OS (config_linux, config_mac, config_win, etc)
         "-configuration",
-        -- vim.env.HOME .. "/.local/share/nvim/mason/packages/jdtls/config_linux",
-        vim.env.HOME .. "/.local/share/nvim/mason/packages/jdtls/config_mac",
+        vim.env.HOME .. "/.local/share/nvim/mason/packages/jdtls/config_linux",
+        -- vim.env.HOME .. "/.local/share/nvim/mason/packages/jdtls/config_mac",
         "-data",
         workspace_dir,
     },
@@ -62,8 +62,8 @@ local config = {
     settings = {
         java = {
             -- TODO Replace this with the absolute path to your main java version (JDK 17 or higher)
-            -- home = "/usr/lib/jvm/java-17-openjdk-amd64",
-            home = "/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home",
+            home = "/usr/lib/jvm/java-21-openjdk-amd64",
+            -- home = "/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home",
             eclipse = {
                 downloadSources = true,
             },
@@ -76,19 +76,19 @@ local config = {
                     --     name = "JavaSE-11",
                     --     path = "/usr/lib/jvm/java-11-openjdk-amd64",
                     -- },
-                    {
-                        name = "JavaSE-17",
-                        -- path = "/usr/lib/jvm/java-17-openjdk-amd64",
-                        path = "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
-                    },
+                    -- {
+                    -- name = "JavaSE-17",
+                    -- path = "/usr/lib/jvm/java-17-openjdk-amd64",
+                    -- path = "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+                    -- },
                     -- {
                     --     name = "JavaSE-19",
                     --     path = "/usr/lib/jvm/java-19-openjdk-amd64",
                     -- },
                     {
                         name = "JavaSE-21",
-                        -- path = "/usr/lib/jvm/java-19-openjdk-amd64",
-                        path = "/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/",
+                        path = "/usr/lib/jvm/java-21-openjdk-amd64/",
+                        -- path = "/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/",
                     },
                 },
             },
