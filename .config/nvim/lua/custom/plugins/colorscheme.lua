@@ -360,6 +360,9 @@ return {
     {
         "nelstrom/vim-mac-classic-theme",
     },
+    {
+        "wincent/base16-nvim",
+    },
     -- {
     --     "LazyVim/LazyVim",
     --     opts = {
