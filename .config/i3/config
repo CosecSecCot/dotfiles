@@ -47,8 +47,9 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
-# bindsym $mod+Return exec /usr/local/bin/alacritty
-bindsym $mod+Return exec kitty
+# bindsym $mod+Return exec alacritty
+# bindsym $mod+Return exec kitty
+bindsym $mod+Return exec ghostty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -196,7 +197,7 @@ client.background       #FFFFFF
 bar {
     font pango:JetbrainsMono Nerd Font 10
     status_command i3status -c $HOME/.config/i3status/i3status.conf
-    position top
+    position bottom
 
     colors {
         background #000000
@@ -222,5 +223,6 @@ bindsym $mod+Shift+s exec --no-startup-id maim --format=png --select "/home/$USE
 
 ## Ricing ?
 # default_border none
-exec --no-startup-id nitrogen --set-auto ~/Downloads/nan-zhou-eu96i9fB__4-unsplash.jpg
+# exec --no-startup-id nitrogen --set-auto ~/Downloads/nan-zhou-eu96i9fB__4-unsplash.jpg
+exec --no-startup-id nitrogen --set-auto ~/Downloads/graph.png
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
