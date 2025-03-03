@@ -1,19 +1,37 @@
 live_config_reload: true
 
+window:
+  opacity: 0.95
+
 font:
   normal:
-    family: "DejavuSansM Nerd Font"
+    # family: "SFMono Nerd Font"
+    # family: "DejavuSansM Nerd Font"
+    # family: "JetBrainsMono Nerd Font"
+    family: "FiraCode Nerd Font"
+    # family: "UbuntuMono Nerd Font"
+    # family: "GeistMono Nerd Font"
     style: Regular
-  size: 15.0
+  size: 16.0
 
   offset:
     x: 0
-    y: -1
+    y: 0
   glyph_offset:
     x: 0
-    y: -1
+    y: 0
 
 bell:
   animation: EaseOutExpo
   color: '#ffffff'
   duration: 0
+
+colors:
+  transparent_background_colors: true
+  draw_bold_text_with_bright_colors: true
+
+  primary:
+    foreground: "#d8d8d8"
+    background: "#141414"
+    dim_foreground: "#828482"
+    bright_foreground: None

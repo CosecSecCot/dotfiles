@@ -1345,7 +1345,7 @@ if vim.g.neovide then
     -- vim.cmd "colorscheme xcodelight"
     vim.cmd "TransparentDisable"
 else
-    vim.cmd "colorscheme vague"
+    vim.cmd "colorscheme gruv-vsassist"
     -- vim.cmd "colorscheme cosec-twilight"
     -- vim.cmd "TransparentEnable"
 end

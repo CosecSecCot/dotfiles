@@ -82,13 +82,13 @@ local cc = s(
 using namespace std;
 
 int32_t main() {{
-        ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-        int T = 1; cin >> T;
-        while (T--) {{
-                {}
-        }}
+    ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+    int T = 1; cin >> T;
+    while (T--) {{
+        {}
+    }}
 
-        return 0;
+    return 0;
 }}
     ]],
         {
@@ -139,10 +139,10 @@ local cc1 = s(
 using namespace std;
 
 int32_t main() {{
-        ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-        {}
+    ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+    {}
 
-        return 0;
+    return 0;
 }}
     ]],
         {
@@ -180,87 +180,6 @@ int32_t main() {{
     )
 )
 table.insert(snippets, cc1)
-
-local boilerplate = s(
-    "boilerplate",
-    fmt(
-        [[
-    #include <bits/stdc++.h>
-    using namespace std;
-
-    {}
-
-    int main() {{
-        ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-    #ifndef ONLINE_JUDGE 
-        freopen("input", "r", stdin); 
-    #endif 
-
-        return 0;
-    }}
-    ]],
-        {
-            i(0, ""),
-        }
-    )
-)
-table.insert(snippets, boilerplate)
-
-local leetcode = s(
-    "leetcode",
-    fmt(
-        [[
-    #include <iostream>
-    using namespace std;
-
-    class Solution {{
-    public:
-        {}
-    }};
-
-    int main()
-    {{
-        ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-        Solution solution;
-
-        return 0;
-    }}
-    ]],
-        {
-            i(0, ""),
-        }
-    )
-)
-table.insert(snippets, leetcode)
-
-local aoc = s(
-    "aoc",
-    fmt(
-        [[
-#include <fstream>
-#include <iostream>
-using namespace std;
-
-int main() {{
-    ifstream input_file("../input");
-    string line;
-    vector<string> lines;
-    while (getline(input_file, line)) {{
-        lines.push_back(line);
-    }}
-
-    {}
-
-    return 0;
-}}
-
-    ]],
-        {
-            i(0, ""),
-        }
-    )
-)
-table.insert(snippets, aoc)
 
 local alle = s(
     "alle",
@@ -343,13 +262,13 @@ local graphinp = s(
     for (int i = 0; i < m; i++) {{
         int u, v;
         cin >> u >> v;
-        graph[u].pb(v);
+        graph[u].push_back(v);
         {}
     }}
     {}
         ]],
         {
-            i(1, "graph[v].pb(u);"),
+            i(1, "graph[v].push_back(u);"),
             i(0, ""),
         }
     )
@@ -360,12 +279,12 @@ local dfsadjlist = s(
     "dfsadj",
     fmt(
         [[
-void dfs(int curr, vector<vector<int>> &adj_list, vector<bool> &visited{}) {{
+void dfs(int curr, vector<vector<int>> &graph, vector<bool> &visited{}) {{
     visited[curr] = true;
     {}
-    for (auto next_node : adj_list[curr]) {{
+    for (auto next_node : graph[curr]) {{
         if (!visited[next_node]) {{
-            dfs(next_node, adj_list, visited);
+            dfs(next_node, graph, visited);
         }}
     }}
 }}
@@ -382,12 +301,12 @@ local dfsweighted = s(
     "dfsw",
     fmt(
         [[
-void dfsw(int curr, vector<vector<pair<int, int>>> &adj_list, vector<bool> &visited{}) {{
+void dfsw(int curr, vector<vector<pair<int, int>>> &graph, vector<bool> &visited{}) {{
     visited[curr] = true;
     {}
-    for (auto next_node : adj_list[curr]) {{
+    for (auto next_node : graph[curr]) {{
         if (!visited[next_node.first]) {{
-            dfsw(next_node.first, adj_list, visited);
+            dfsw(next_node.first, graph, visited);
         }}
     }}
 }}
@@ -433,12 +352,12 @@ local bipertite2 = s(
     "bipertite2",
     fmt(
         [[
-bool bipertite2(int curr, vector<vector<int>> &adj_list, vector<int> &color, int currcolor) {{
+bool bipertite2(int curr, vector<vector<int>> &graph, vector<int> &color, int currcolor) {{
     color[curr] = currcolor;
 
-    for (auto next_node : adj_list[curr]) {{
+    for (auto next_node : graph[curr]) {{
         if (color[next_node] == -1) {{
-            if (!bipertite2(next_node, adj_list, color, (currcolor == 1 ? 2 : 1)))
+            if (!bipertite2(next_node, graph, color, (currcolor == 1 ? 2 : 1)))
                 return false;
         }} else if (color[next_node] == currcolor) {{
             return false;
@@ -457,12 +376,12 @@ local graphcycledfs = s(
     "graphcycledfs",
     fmt(
         [[
-bool graphcycledfs(int curr, vector<vector<int>> &adj_list, vector<bool> &visited, int currparent{}) {{
+bool graphcycledfs(int curr, vector<vector<int>> &graph, vector<bool> &visited, int currparent{}) {{
     visited[curr] = true;
     {}
-    for (auto next_node : adj_list[curr]) {{
+    for (auto next_node : graph[curr]) {{
         if (!visited[next_node]) {{
-            if (graphcycledfs(next_node, adj_list, visited, curr)) {{
+            if (graphcycledfs(next_node, graph, visited, curr)) {{
                 return true;
             }}
         }} else if (next_node != currparent) {{
@@ -539,7 +458,7 @@ local bfsadj = s(
     "bfsadj",
     fmt(
         [[
-void bfs(vector<vector<int>> &adj_list, int src, vector<bool> &visited) {{
+void bfs(vector<vector<int>> &graph, int src, vector<bool> &visited) {{
     queue<int> q;
     q.push(src);
 
@@ -550,7 +469,7 @@ void bfs(vector<vector<int>> &adj_list, int src, vector<bool> &visited) {{
         q.pop();
         // cout << currentNode << " ";
 
-        for (int next_node : adj_list[curr]) {{
+        for (int next_node : graph[curr]) {{
             if (!visited[next_node]) {{
                 visited[next_node] = true;
                 q.push(next_node);
@@ -568,8 +487,8 @@ local dijkstra = s(
     "dijkstra",
     fmt(
         [[
-vector<{}> dijkstra(vector<vector<pair<{}, {}>>> &adj_list, {} src) {{
-    vector<{}> dist(len(adj_list), {});
+vector<{}> dijkstra(vector<vector<pair<{}, {}>>> &graph, {} src) {{
+    vector<{}> dist(graph.size(), {});
     dist[src] = 0;
 
     priority_queue<pair<{}, {}>, vector<pair<{}, {}>>, greater<pair<{}, {}>>> pq;
@@ -584,7 +503,7 @@ vector<{}> dijkstra(vector<vector<pair<{}, {}>>> &adj_list, {} src) {{
             continue;
         }}
 
-        for (auto &neighbour : adj_list[currnode]) {{
+        for (auto &neighbour : graph[currnode]) {{
             {} neighbour_node = neighbour.first;
             {} weight = neighbour.second;
 
@@ -626,8 +545,8 @@ local dijkstrapath = s(
     "dijkstrapath",
     fmt(
         [[
-vector<pair<{}, {}>> dijkstra(vector<vector<pair<{}, {}>>> &adj_list, {} src) {{
-    vector<pair<{}, {}>> dist(len(adj_list), {{-1, {}}});
+vector<pair<{}, {}>> dijkstra(vector<vector<pair<{}, {}>>> &graph, {} src) {{
+    vector<pair<{}, {}>> dist(graph.size(), {{-1, {}}});
     dist[src] = {{-1, 0}};
 
     priority_queue<pair<{}, {}>, vector<pair<{}, {}>>, greater<pair<{}, {}>>> pq;
@@ -642,7 +561,7 @@ vector<pair<{}, {}>> dijkstra(vector<vector<pair<{}, {}>>> &adj_list, {} src) {{
             continue;
         }}
 
-        for (auto &neighbour : adj_list[currnode]) {{
+        for (auto &neighbour : graph[currnode]) {{
             {} neighbour_node = neighbour.first;
             {} weight = neighbour.second;
 
@@ -722,8 +641,8 @@ local bellmanford = s(
     "bellmanford",
     fmt(
         [[
-vector<ll> bellmanFord(vector<Edge> &edges, int n, int src, int &last) {{
-    vector<ll> d(n + 1, LLONG_MAX);
+vector<int64_t> bellmanFord(vector<Edge> &edges, int n, int src, int &last) {{
+    vector<int64_t> d(n + 1, LLONG_MAX);
     vector<int> p(n + 1, -1);
     d[src] = 0;
     int x = -1;

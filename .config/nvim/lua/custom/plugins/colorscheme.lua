@@ -11,12 +11,7 @@ return {
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()
-            require("rose-pine").setup {
-                styles = {
-                    italic = false,
-                    transparency = true,
-                },
-            }
+            require("rose-pine").setup {}
         end,
     },
     {
@@ -26,8 +21,19 @@ return {
         },
     },
     { "nyoom-engineering/oxocarbon.nvim" },
-    { "nyoom-engineering/oxocarbon.nvim" },
-    { "rafi/awesome-vim-colorschemes" },
+    {
+        "rafi/awesome-vim-colorschemes",
+        config = function()
+            -- Custom groups
+            vim.cmd [[
+              autocmd ColorScheme iceberg hi Title gui=bold 
+              autocmd ColorScheme iceberg hi DiagnosticOk ctermfg=150 guifg=#b4be82
+              autocmd ColorScheme iceberg hi Added ctermfg=150 guifg=#b4be82
+              autocmd ColorScheme iceberg hi Removed ctermfg=203 guifg=#e27878
+              autocmd ColorScheme iceberg hi Changed ctermfg=109 guifg=#89b8c2
+            ]]
+        end,
+    },
     { "fcpg/vim-fahrenheit" },
     { "Lokaltog/vim-distinguished" },
     { "savq/melange-nvim" },
@@ -112,21 +118,21 @@ return {
         },
         config = function(_, opts)
             require("kanagawa").setup(opts)
-            vim.cmd "colorscheme kanagawa"
+            -- vim.cmd "colorscheme kanagawa-dragon"
 
             -- Custom diff colors
             vim.cmd [[
-              autocmd VimEnter * hi DiffAdd guifg=#00FF00 guibg=#005500
-              autocmd VimEnter * hi DiffDelete guifg=#FF0000 guibg=#550000
-              autocmd VimEnter * hi DiffChange guifg=#CCCCCC guibg=#555555
-              autocmd VimEnter * hi DiffText guifg=#00FF00 guibg=#005500
+              autocmd VimEnter kanagawa hi DiffAdd guifg=#00FF00 guibg=#005500
+              autocmd VimEnter kanagawa hi DiffDelete guifg=#FF0000 guibg=#550000
+              autocmd VimEnter kanagawa hi DiffChange guifg=#CCCCCC guibg=#555555
+              autocmd VimEnter kanagawa hi DiffText guifg=#00FF00 guibg=#005500
             ]]
 
             -- Custom border colors
-            -- vim.cmd [[
-            --   autocmd ColorScheme * hi NormalFloat guifg=#F9E7C0 guibg=#101010
-            --   autocmd ColorScheme * hi FloatBorder guifg=#F9E7C0 guibg=#101010
-            -- ]]
+            vim.cmd [[
+              autocmd ColorScheme kanagawa hi NormalFloat guifg=#F9E7C0 guibg=#101010
+              autocmd ColorScheme kanagawa hi FloatBorder guifg=#F9E7C0 guibg=#101010
+            ]]
         end,
     },
     {
@@ -264,7 +270,8 @@ return {
         config = function()
             require("aurora").setup {
                 transparent_background = true,
-                contrast_dark = "soft",
+                contrast_dark = "hard",
+                override_terminal = true,
             }
         end,
     },
@@ -362,6 +369,68 @@ return {
     },
     {
         "wincent/base16-nvim",
+    },
+    {
+        "bartekjaszczak/gruv-vsassist.nvim",
+        config = function()
+            require("gruv-vsassist").setup {
+                -- Enable transparent background
+                -- transparent = true,
+
+                -- Enable italic comment
+                italic_comments = true,
+
+                -- Disable nvim-tree background color
+                -- disable_nvimtree_bg = true,
+            }
+
+            vim.cmd [[
+              autocmd ColorScheme gruv-vsassist hi @parameter guifg=#bdb76b
+              autocmd ColorScheme gruv-vsassist hi @parameter.reference guifg=#bdb76b
+              autocmd ColorScheme gruv-vsassist hi @namespace guifg=#b8d7a3
+              autocmd ColorScheme gruv-vsassist hi @function.call guifg=#ff8000
+              autocmd ColorScheme gruv-vsassist hi Macro gui=bold
+              autocmd ColorScheme gruv-vsassist hi @namespace gui=italic
+              autocmd ColorScheme gruv-vsassist hi @constant guifg=#d16969 gui=bold
+              autocmd ColorScheme gruv-vsassist hi @constant.builtin gui=bold
+              autocmd ColorScheme gruv-vsassist hi @constant.macro gui=bold
+            ]]
+        end,
+    },
+    {
+        "vague2k/vague.nvim",
+        config = function()
+            require("vague").setup {
+                transparent = true,
+                style = {
+                    -- "none" is the same thing as default. But "italic" and "bold" are also valid options
+                    boolean = "bold",
+                    number = "none",
+                    float = "none",
+                    error = "bold",
+                    comments = "italic",
+                    conditionals = "none",
+                    functions = "none",
+                    headings = "bold",
+                    operators = "none",
+                    strings = "none",
+                    variables = "none",
+
+                    -- keywords
+                    keywords = "none",
+                    keyword_return = "italic",
+                    keywords_loop = "none",
+                    keywords_label = "none",
+                    keywords_exception = "none",
+
+                    -- builtin
+                    builtin_constants = "bold",
+                    builtin_functions = "none",
+                    builtin_types = "bold",
+                    builtin_variables = "none",
+                },
+            }
+        end,
     },
     -- {
     --     "LazyVim/LazyVim",
