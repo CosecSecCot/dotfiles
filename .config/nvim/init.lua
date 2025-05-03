@@ -230,6 +230,30 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+-- Tab width for different filetypes
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "json",
+        "jsonc",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    },
+    callback = function()
+        vim.bo.tabstop = 2
+        vim.bo.shiftwidth = 2
+        vim.bo.softtabstop = 2
+    end,
+})
+
+vim.filetype.add {
+    extension = {
+        frag = "glsl",
+        vert = "glsl",
+    },
+}
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -1298,6 +1322,9 @@ require("lazy").setup({
             --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
         end,
     },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+    },
 
     -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -1323,10 +1350,6 @@ require("lazy").setup({
     --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
     --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
     { import = "custom.plugins" },
-
-    -- {
-    --     { dir = "~/myfiles/cosec-twilight/", lazy = true },
-    -- },
 }, {
     ui = {
         -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -1345,8 +1368,7 @@ if vim.g.neovide then
     -- vim.cmd "colorscheme xcodelight"
     vim.cmd "TransparentDisable"
 else
-    vim.cmd "colorscheme gruv-vsassist"
-    -- vim.cmd "colorscheme cosec-twilight"
+    vim.cmd "colorscheme seoul256"
     -- vim.cmd "TransparentEnable"
 end
 
