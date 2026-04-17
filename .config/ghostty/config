@@ -1,16 +1,37 @@
 # font-family = CaskaydiaCove Nerd Font
-# font-family = JetBrainsMono Nerd Font
-font-family = Iosevka Custom
+font-family = JetBrainsMono Nerd Font
+# font-family = IosevkaTerm Nerd Font Propo
+# font-family =  FiraCode Nerd Font
+# font-family =  GeistMono Nerd Font
+# font-family = GohuFont 14 Nerd Font Propo
+# font-family = Menlo
+# font-family = SF Mono
+# font-family = Lilex
 
-# theme = iceberg-dark
-theme = seoulbones_dark
-# background = 1e1e1e
-# background = 141414
+adjust-cell-height = -10%
+
+
+
+theme = Arthur
+palette = 0=#2A2A2A
+palette = 8=#545454
+background = #1f1f1f
+
+
 
 font-thicken = true
+font-thicken-strength = 0
 bold-is-bright = true
 copy-on-select = true
 
-# custom-shader = ing-game-crt.glsl
+cursor-invert-fg-bg = true
 
-shell-integration-features = no-cursor,no-sudo,title
+# background-opacity = 0.95
+# background-blur = true
+window-padding-color = extend
+
+# custom-shader = tft.glsl
+# custom-shader = bettercrt.glsl
+# custom-shader = in-game-crt.glsl
+
+# shell-integration-features = no-cursor,no-sudo,title
