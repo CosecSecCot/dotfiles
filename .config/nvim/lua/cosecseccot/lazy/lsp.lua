@@ -77,6 +77,12 @@ return {
                 },
             }
 
+            local on_attach = function(client, bufnr)
+                if client.name == "rust_analyzer" then
+                    client.server_capabilities.semanticTokensProvider = nil
+                end
+            end
+
             local capabilities = vim.tbl_deep_extend(
                 "force",
                 {},
@@ -94,6 +100,7 @@ return {
                     function(server_name)
                         local server_config = server_configs[server_name] or {}
                         server_config.capabilities = server_config.capabilities or capabilities
+                        server_config.on_attach = on_attach
 
                         if server_name ~= "jdtls" then
                             require("lspconfig")[server_name].setup(server_config)
@@ -106,9 +113,9 @@ return {
                 signs = {
                     text = {
                         [vim.diagnostic.severity.ERROR] = "",
-                        [vim.diagnostic.severity.WARN] =  "",
-                        [vim.diagnostic.severity.HINT] =  "",
-                        [vim.diagnostic.severity.INFO] =  "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.HINT] = "",
+                        [vim.diagnostic.severity.INFO] = "",
                     },
                 },
                 -- update_in_insert = true,

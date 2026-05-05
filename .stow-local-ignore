@@ -1,0 +1,7 @@
+\.git
+\.gitignore
+\.stow-local-ignore
+\.clang-format
+Screenshots
+README.md
+cosec-debug.hpp

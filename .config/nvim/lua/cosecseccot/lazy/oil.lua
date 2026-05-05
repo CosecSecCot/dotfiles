@@ -9,7 +9,7 @@ return {
     opts = {
         view_options = {
             show_hidden = true,
-            highlight_filename = function (entry, is_hidden, _, _)
+            highlight_filename = function(entry, is_hidden, _, _)
                 if entry.name == ".." then
                     return nil
                 end
@@ -19,8 +19,8 @@ return {
                 end
 
                 return nil
-            end
-        }
+            end,
+        },
     },
 
     -- Optional dependencies

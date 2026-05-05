@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Tab width for different filetypes
 vim.api.nvim_create_autocmd("FileType", {
+    desc = "Set tab width to 2 for selected filetypes",
     pattern = {
         "json",
         "jsonc",
@@ -31,14 +32,50 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Start Treesitter only if parser exists",
+    callback = function(ctx)
+        -- Skip special/plugin buffers
+        if vim.bo[ctx.buf].buftype ~= "" then
+            return
+        end
+
+        -- Get Treesitter language from filetype
+        local lang = vim.treesitter.language.get_lang(ctx.match)
+        if not lang then
+            return
+        end
+
+        -- Check if parser exists
+        local ok = pcall(vim.treesitter.language.add, lang)
+        if not ok then
+            return
+        end
+
+        -- Start Treesitter safely
+        pcall(vim.treesitter.start, ctx.buf)
+    end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
     -- group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "g.", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("n", "grn", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
-    end
+        vim.keymap.set("n", "gd", function()
+            vim.lsp.buf.definition()
+        end, opts)
+        vim.keymap.set("n", "K", function()
+            vim.lsp.buf.hover()
+        end, opts)
+        vim.keymap.set("n", "g.", function()
+            vim.lsp.buf.code_action()
+        end, opts)
+        vim.keymap.set("n", "grn", function()
+            vim.lsp.buf.rename()
+        end, opts)
+        -- vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
+        vim.keymap.set("n", "<leader>f", function()
+            require("conform").format({ async = true, lsp_fallback = true })
+        end, opts)
+    end,
 })

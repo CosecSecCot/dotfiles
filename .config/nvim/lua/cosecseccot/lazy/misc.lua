@@ -9,6 +9,9 @@ return {
         "stevearc/dressing.nvim",
         event = "VeryLazy",
     },
+    -- {
+    --     "godlygeek/tabular"
+    -- },
     {
         "nvimdev/indentmini.nvim",
         event = "BufEnter",

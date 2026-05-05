@@ -5,40 +5,40 @@ vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
 if vim.g.neovide then
-	vim.o.guifont = "FiraCode Nerd Font:h16"
+    vim.o.guifont = "FiraCode Nerd Font:h16"
 
-	vim.g.neovide_scroll_animation_length = 0.2
-	vim.g.neovide_cursor_animation_length = 0.005
-	-- vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_scroll_animation_length = 0.2
+    vim.g.neovide_cursor_animation_length = 0.005
+    -- vim.g.neovide_cursor_animation_length = 0
 
-	-- vim.g.neovide_transparency = 0.95
-	-- vim.g.transparency = 0.95
+    -- vim.g.neovide_transparency = 0.95
+    -- vim.g.transparency = 0.95
 
-	vim.g.neovide_floating_blur_amount_x = 5.0
-	vim.g.neovide_floating_blur_amount_y = 5.0
+    vim.g.neovide_floating_blur_amount_x = 5.0
+    vim.g.neovide_floating_blur_amount_y = 5.0
 
-	vim.g.neovide_floating_shadow = true
-	vim.g.neovide_floating_z_height = 10
-	vim.g.neovide_light_angle_degrees = 45
-	vim.g.neovide_light_radius = 10
+    vim.g.neovide_floating_shadow = true
+    vim.g.neovide_floating_z_height = 10
+    vim.g.neovide_light_angle_degrees = 45
+    vim.g.neovide_light_radius = 10
 
-	-- vim.g.neovide_padding_top = 0
-	-- vim.g.neovide_padding_bottom = 0
-	-- vim.g.neovide_padding_right = 10
-	-- vim.g.neovide_padding_left = 10
+    -- vim.g.neovide_padding_top = 0
+    -- vim.g.neovide_padding_bottom = 0
+    -- vim.g.neovide_padding_right = 10
+    -- vim.g.neovide_padding_left = 10
 
-	vim.g.neovide_scale_factor = 1.0
-	local change_scale_factor = function(delta)
-		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
-	end
-	vim.keymap.set("n", "<C-=>", function()
-		change_scale_factor(1.25)
-	end)
-	vim.keymap.set("n", "<C-->", function()
-		change_scale_factor(1 / 1.25)
-	end)
+    vim.g.neovide_scale_factor = 1.0
+    local change_scale_factor = function(delta)
+        vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+    end
+    vim.keymap.set("n", "<C-=>", function()
+        change_scale_factor(1.25)
+    end)
+    vim.keymap.set("n", "<C-->", function()
+        change_scale_factor(1 / 1.25)
+    end)
 
-	vim.g.experimental_layer_grouping = true
+    vim.g.experimental_layer_grouping = true
 end
 
 -- [[ Setting options ]]
@@ -115,11 +115,11 @@ vim.o.splitbelow = true
 --  and `:help 'listchars'`
 vim.o.list = true
 vim.opt.listchars = {
-	tab = "» ",
-	-- tab = "· ",
-	trail = "·",
-	nbsp = "␣",
-	-- eol = "↲",
+    tab = "» ",
+    -- tab = "· ",
+    trail = "·",
+    nbsp = "␣",
+    -- eol = "↲",
 }
 
 -- Preview substitutions live, as you type!
@@ -132,8 +132,8 @@ vim.g.netrw_banner = false
 vim.o.cursorline = true
 
 vim.filetype.add({
-	extension = {
-		frag = "glsl",
-		vert = "glsl",
-	},
+    extension = {
+        frag = "glsl",
+        vert = "glsl",
+    },
 })

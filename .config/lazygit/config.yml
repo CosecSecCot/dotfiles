@@ -1,0 +1,18 @@
+gui:
+  border: single
+  spinner:
+    frames:
+      - ⠋
+      - ⠙
+      - ⠹
+      - ⠸
+      - ⠼
+      - ⠴
+      - ⠦
+      - ⠧
+      - ⠇
+      - ⠏
+
+# git:
+#   pagers:
+#     - externalDiffCommand: "difft --color=always --display=inline --syntax-highlight=on --tab-width=2"

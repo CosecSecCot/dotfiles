@@ -1,3 +1,3 @@
 require("cosecseccot")
 
-vim.cmd.colorscheme("kanagawa-wave")
+vim.cmd.colorscheme("cosec-twilight")

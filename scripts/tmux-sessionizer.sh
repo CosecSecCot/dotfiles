@@ -19,7 +19,8 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . ' ')
+# selected_name=$(basename "$selected" | tr . ' ')
+selected_name=$(basename "$selected" | sed 's/[^a-zA-Z0-9_-]/_/g')
 
 # Check if tmux is running
 # if ! pgrep -x "tmux" > /dev/null; then
